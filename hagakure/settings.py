@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'auth_ex',
 ]
 
 MIDDLEWARE = [
@@ -75,6 +76,12 @@ WSGI_APPLICATION = 'hagakure.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = LOCAL_DATABASES
+
+
+# User substitution
+# https://docs.djangoproject.com/en/1.11/topics/auth/customizing/#auth-custom-user
+
+AUTH_USER_MODEL = 'auth_ex.User'
 
 
 # Password validation
