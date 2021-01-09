@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'auth_ex',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Email Server Setup
+# TODO: EMAIL_HOST, EMAIL_HOST, EMSIL_HOST_USER filef in when available - in local_settings.py!
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
+EMAIL_HOST = 'your_mail_server'  
+EMAIL_HOST_PASSWORD = 'your_password'  
+EMAIL_HOST_USER = 'your_email'  
+EMAIL_PORT = 465  
+EMAIL_USE_SSL = True  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
