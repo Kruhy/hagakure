@@ -1,0 +1,187 @@
+{% extends "hagakure/base.html" %}
+
+{% block body %}
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Treningi</h1>
+        <ul class="nav justify-content-center">
+        <li class="nav-item">
+                <a class="btn btn-light" href="#">Wszystkie</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Judo - dzieci</a>
+            </li>
+             <li class="nav-item">
+                <a class="btn btn-light" href="#">Judo - młodzież</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Judo - dorośli</a>
+            </li>
+                <li class="nav-item">
+                <a class="btn btn-light" href="#">Samobrona</a>
+            </li>
+            </li>
+                <li class="nav-item">
+                <a class="btn btn-light" href="{% url 'trainers' %}">Trenerzy</a>
+            </li>
+        </ul> 
+    </div>
+    <div class="container-fluid">
+		<div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+            <div class="col-sm-9 text-center">
+                <h2>Judo Tradycyjne dla Dzieci - grupa poczatkująca 1</h2>
+                <h5 style="margin-bottom:15px">
+                    Zajęcia dla dzieci w wieku od 4 do 10 lat. Do trzeciego Kyu.
+                </h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="col-sm-3">Tremin</th>
+                            <th class="col-sm-3">Dni tygodnia</th>
+                            <th class="col-sm-3">Godzina rozpoczęcia</th>
+                            <th class="col-sm-3">Czas Trwania</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">
+                                01.01.2020 
+                                - 
+                                30.06.2020 
+                            </td>
+                            <td class="align-middle">
+                                Poniedziałek
+                                <br>
+                                Środa
+                                <br>
+                                Piątek
+                                <br>
+                            </td>
+                            <td class="align-middle"> 
+                                15:00
+                            </td>
+                            <td class="align-middle">
+                                90 
+                                minut
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span class="font-weight-bold">
+                                    Trener:
+                                </span>
+                                <a href="#" class="text-body">
+                                    Piotr Przybyłowski
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+            <div class="col-sm-9 text-center">
+                <h2>Judo Sportowe dla Młodzieży - grupa zaawansowana 1</h2>
+                <h5 style="margin-bottom:15px">
+                    Zajęcia dla młodzieży w wieku od 14 do 18 lat. Od trzeciego Kyu.
+                </h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="col-sm-3">Tremin</th>
+                            <th class="col-sm-3">Dni tygodnia</th>
+                            <th class="col-sm-3">Godzina rozpoczęcia</th>
+                            <th class="col-sm-3">Czas Trwania</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">
+                                01.01.2020 
+                                - 
+                                30.06.2020 
+                            </td>
+                            <td class="align-middle">
+                                Poniedziałek
+                                <br>
+                                Środa
+                                <br>
+                                Piątek
+                                <br>
+                            </td>
+                            <td class="align-middle"> 
+                                17:00
+                            </td>
+                            <td class="align-middle">
+                                90 
+                                minut
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span class="font-weight-bold">
+                                    Trener:
+                                </span>
+                                <a href="#" class="text-body">
+                                    Piotr Przybyłowski
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+            <div class="col-sm-9 text-center">
+                <h2>Judo Tradycyjne dla Dorosłych - grupa poczatkująca 1</h2>
+                <h5 style="margin-bottom:15px">
+                    Zajęcia dla dorosłych. Do trzeciego Kyu.
+                </h5>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="col-sm-3">Tremin</th>
+                            <th class="col-sm-3">Dni tygodnia</th>
+                            <th class="col-sm-3">Godzina rozpoczęcia</th>
+                            <th class="col-sm-3">Czas Trwania</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">
+                                01.01.2020 
+                                - 
+                                30.06.2020 
+                            </td>
+                            <td class="align-middle">
+                                Poniedziałek
+                                <br>
+                                Środa
+                                <br>
+                                Piątek
+                                <br>
+                            </td>
+                            <td class="align-middle"> 
+                                19:00
+                            </td>
+                            <td class="align-middle">
+                                90 
+                                minut
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <span class="font-weight-bold">
+                                    Trener:
+                                </span>
+                                <a href="#" class="text-body">
+                                    Piotr Przybyłowski
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+    

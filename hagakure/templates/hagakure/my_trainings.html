@@ -1,0 +1,414 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>hagakure</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="../../static/css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+                <img src="../../static/img/kamon_no_text.gif" alt="Logo" style="width:30px;">
+            </a>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Aktualności</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Treningi</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Artykuły</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">O nas</a>
+                    </li>
+                    <!-- for logged users only -->
+					<li class="nav-item">
+                        <a class="nav-link" href="#">Galeria</a>
+                    </li>
+					<li class="nav-item">
+                        <a class="nav-link" href="#">Komunikator</a>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+					<!-- for not logged in users
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                        <span class="glyphicon glyphicon-log-in"></span>Zaloguj</a>
+                    </li>
+					-->
+					<!-- for logged in users -->
+					<div class="dropdown">
+						<button type="button" class="btn btn-light dropdown-toggle text-muted" data-toggle="dropdown">
+							Imię użytkownika
+						</button>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="#">Mój Profil</a>
+							<a class="dropdown-item" href="#">Moje treningi</a>
+							<a class="dropdown-item" href="#">Wiadomości</a>
+                            <!-- if superuser -->
+                            <div class="dropdown-divider"> </div>
+                            <a class="dropdown-item" href="#">Zarządzaj stroną</a>
+                            <!-- if contributor -->
+                            <a class="dropdown-item" href="#">Zarządzaj Wpisami</a>
+                            <!-- if trained -->
+                            <a class="dropdown-item" href="#">Zarządzaj treningami</a>
+							<div class="dropdown-divider"> </div>
+							<a class="dropdown-item" href="#">Wyloguj</a>
+							
+						</div>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Moje Treningi</h1>
+    </div>
+    <div class="container-fluid">
+		<div class="row justify-content-center" style="margin-top:30px">
+            <div class="col-sm-9 text-center">
+                <h2>Judo Tradycyjne dla Dorosłych - grupa poczatkująca</h2>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="col-sm-2">Tremin</th>
+                            <th class="col-sm-2">Dni tygodnia</th>
+                            <th class="col-sm-2">Godzina rozpoczęcia</th>
+                            <th class="col-sm-2">Czas Trwania</th>
+                            <th class="col-sm-2">Trener</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">
+                                01.01.2020 
+                                - 
+                                30.06.2020 
+                            </td>
+                            <td class="align-middle">
+                                Poniedziałek
+                                <br>
+                                Środa
+                                <br>
+                                Piątek
+                                <br>
+                            </td>
+                            <td class="align-middle"> 
+                                15:00
+                            </td>
+                            <td class="align-middle">
+                                90 
+                                minut
+                            </td>
+                            <td class="align-middle">
+                                Piotr Przybyłowski
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center border-bottom border-dark my-3">
+            <div class="col-sm-9 text-center border my-3">
+                <div class="my-3">
+                    <h4>Wiadomości:</h4>
+                </div>
+                <div id="table-responsive" style="margin-bottom:30px">
+                    <table class="table table-bordered">
+                        <thead class="thead-light" id="responsive">
+                            <tr>
+                                <th class="col-sm-2">Autor</th>
+                                <th class="col-sm-2">Dodano</th>
+                                <th class="col-sm-8">Treść</th>
+                            <tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-secondary">
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="my-3">
+                    <h4>Dodaj wiadomość:</h4>
+                </div>
+                <div class="container">
+                    <form action="/" class="form" method="POST">
+                        <div class="form-group row">
+                            <div class="col">
+                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor">
+                                    Wiadomość
+                                </textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row justify-content-center" style="margin-top:30px">
+            <div class="col-sm-9 text-center">
+                <h2>Joga dla Dorosłych</h2>
+                <table class="table table-bordered">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="col-sm-2">Tremin</th>
+                            <th class="col-sm-2">Dni tygodnia</th>
+                            <th class="col-sm-2">Godzina rozpoczęcia</th>
+                            <th class="col-sm-2">Czas Trwania</th>
+                            <th class="col-sm-2">Trener</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="align-middle">
+                                01.01.2020 
+                                - 
+                                30.06.2020 
+                            </td>
+                            <td class="align-middle">
+                                Wtorek
+                                <br>
+                                Czwartek
+                            </td>
+                            <td class="align-middle"> 
+                                15:00
+                            </td>
+                            <td class="align-middle">
+                                90 
+                                minut
+                            </td>
+                            <td class="align-middle">
+                                Piotr Przybyłowski
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row justify-content-center border-bottom border-dark">
+            <div class="col-sm-9 text-center border my-3">
+                <div class="my-3">
+                    <h4>Wiadomości:</h4>
+                </div>
+                <div id="table-responsive" style="margin-bottom:30px">
+                    <table class="table table-bordered">
+                        <thead class="thead-light" id="thead-responsive">
+                            <tr>
+                                <th class="col-sm-2">Autor</th>
+                                <th class="col-sm-2">Dodano</th>
+                                <th class="col-sm-8">Treść</th>
+                            <tr>
+                        </thead>
+                        <tbody>
+                            <tr class="table-secondary">
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr class="table-secondary">
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-sm-2 align-middle">GalAn</th>
+                                <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
+                                <td class="col-sm-8 text-left">
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat lacus non dui bibendum, 
+                                    auctor tempor lectus egestas. Praesent in augue maximus, vulputate augue eu, interdum mauris. 
+                                    Integer viverra justo sem, id tristique mauris tincidunt vitae. Aenean est elit, viverra at aliquam sed, 
+                                    imperdiet et metus. Aenean malesuada pellentesque velit. 
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="my-3">
+                    <h4>Dodaj wiadomość:</h4>
+                </div>
+                <div class="container">
+                    <form action="/" class="form" method="POST">
+                        <div class="form-group row">
+                            <div class="col">
+                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor">
+                                    Wiadomość
+                                </textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    <footer class="footer">
+		<div class="container-fluid">
+			<div class="row bg-danger border-top border-dark" style="margin-top:10px">
+				<div class="col-sm-3">
+					<div class="container-fluid pt-3 align-top">
+						<span class="text-white">Kontakt:<br><span>
+						<a href="malito:kontakt@kontakt.com" class="text-white">kontakt@kontakt.com</a><br>
+						<a href="http://facebook.com" class="text-white">
+							<i class="fa fa-facebook-square"> facebook</i>
+						</a>
+					</div>
+				</div>
+				<div class="col-sm-6 text-center text-white">
+					<span style="font-size:30px">柔道</span><br>
+					Judo - łagodna droga
+				</div>
+				<div class="col-sm-3 text-white text-right">
+						<p class="py-0 my-0 font-weight-light">Stowarzyszenie Sportowe Hagakure</p>
+						<p class="py-0 my-0 font-weight-light">ul. Chmielna 2/31</p>
+						<p class="py-0 my-0 font-weight-light">00-020 Warszawa</p>
+						<p class="py-0 my-0 font-weight-light">NIP:00-00-000-000</p>
+						<p class="py-0 my-0 font-weight-light">REGON:000000000</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+	<script src="js/scripts.js"></script>
+</body>

@@ -1,0 +1,44 @@
+{% load static %}
+
+#banner-container {
+    width: auto;
+    height: 500px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+#content-wrap {
+    padding-bottom: 8.25rem;    /* Footer height */
+  }
+  
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8.25rem;            /* Footer height */
+  }
+#banner {
+  background: url("../../hagakure/img/dojo.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color:#f7f7f7;
+}
+#table-responsive {
+  height:300px;
+  overflow:scroll;
+}
+thead#responsive tr:nth-child(1) th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#gallery{
+  width: 400px;
+  height: auto;
+}

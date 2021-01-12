@@ -1,0 +1,332 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+	{% block header %}
+		<header>
+			<div class="card" style="height:500px" id="banner">
+				<div class="card-img-overlay">
+					<div class="container-fluid">
+						<div class="row my-4">
+							<div class="col align-self-center text-right">
+								<img class="img-fluid" src="{% static 'hagakure/img/kamon.gif' %}">
+							</div>
+							<div class="col align-self-center text-left">
+								<h1 class="display-3">
+									Stowarzyszenie<br>
+									Sportowe<br>
+									Hagakure
+								</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav class="navbar navbar-expand-sm navbar-light bg-light justify-content-center">
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="collapsibleNavbar">
+					<ul class="navbar-nav mx-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'news' %}">Aktualności</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'trainings' %}">Treningi</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'articles' %}">Artykuły</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'galleries' %}">Galeria</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'about_us' %}">O nas</a>
+						</li>
+						<!-- vvv for logged users only vvv -->
+						
+						<li class="nav-item">
+							<a class="nav-link" href="#" hidden>Komunikator</a>
+						</li>
+
+						<!-- ^^^ for logged users only ^^^ -->
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						{% if user.is_authenticated %}
+							<div class="dropdown">
+								<button type="button" class="btn btn-light dropdown-toggle text-muted" data-toggle="dropdown">
+									{{ name }}
+								</button>
+
+								<div class="dropdown-menu dropdown-menu-right">
+									<a class="dropdown-item" href="#">Mój Profil</a>
+									<a class="dropdown-item" href="#">Moje treningi</a>
+									<a class="dropdown-item" href="#" hidden>Wiadomości</a>
+
+									{% if user.is_superuser %}
+										<div class="dropdown-divider"> </div>
+										<a class="dropdown-item" href="admin/">Zarządzaj stroną</a>
+										<a class="dropdown-item" href="#">Dodaj Użytkownika</a>
+									{% endif %}
+
+									{% if user.is_staff %}
+										<div class="dropdown-divider"> </div>
+										<a class="dropdown-item" href="#">Dodaj artykuł</a>
+										<a class="dropdown-item" hfer="#">Dodaj aktualności</a>
+									{% endif %}
+
+									<div class="dropdown-divider"> </div>
+									<a class="dropdown-item" href="#">Wyloguj</a>                                            
+								</div>
+
+							</div>
+						{% else %}
+							<a class="nav-link" href="{% url 'login' %}">
+							<span class="glyphicon glyphicon-log-in"></span>Zaloguj</a>
+						{% endif %}
+					</ul>
+				</div>
+			</nav>
+		</header>
+	{% endblock %}
+
+	{% block body %}
+		<div class="container-fluid" style="margin-top:30px">
+			<div class="row justify-content-center">
+				<div class="col-sm-3 order-last">
+				
+					<h5 class="text-center">Najnowsze artykuły</h5>
+					
+					<div class="container-fluid" style="margin-top:10px">
+						<p class="font-weight-light">
+						<span class="font-weight-normal"> Lorem ipsum dolor sit amet.</span>
+						Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
+						In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
+						bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
+						<a href="#" class="text-right">...&gt;</a>
+						</p>
+						
+					</div>
+					
+					<div class="container-fluid" style="margin-top:10px">
+						<p class="font-weight-light">
+						<span class="font-weight-normal"> Lorem ipsum dolor sit amet.</span>
+						Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
+						In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
+						bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
+						<a href="#" class="text-right">...&gt;</a>
+						</p>
+					</div>
+
+					<div class="container-fluid" style="margin-top:10px">
+						<p class="font-weight-light">
+						<span class="font-weight-normal"> Lorem ipsum dolor sit amet.</span>
+						Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
+						In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
+						bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
+						<a href="#" class="text-right">...&gt;</a>
+						</p>
+					</div>
+					
+					<div class="container-fluid" style="margin-top:10px">
+						<p class="font-weight-light">
+						<span class="font-weight-normal"> Lorem ipsum dolor sit amet.</span>
+						Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
+						In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
+						bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
+						<a href="#" class="text-right">...&gt;</a>
+						</p>
+					</div>
+					
+				</div>
+				<div class="col-sm-6 border-left border-right border-dark">
+					<h3 class="text-center">Aktualności</h3>
+					<div class="container-fluid" style="margin-top:20px">
+					
+						<div class="container-fluid" style="margin-top:30px">
+							<h4 class="text-center">Lorem ipsum dolor sit amet.</h4>
+							<p class="font-weight-light">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus imperdiet magna ut tincidunt.
+							Vivamus dui ante, pretium ornare posuere id, sodales et nisi. Integer non mauris tincidunt, efficitur neque et,
+							aliquet risus. Proin aliquet, lectus ac porta porttitor, justo mi interdum felis, interdum aliquam ligula risus vitae purus.
+							Mauris lobortis urna tortor, at porttitor tortor pretium eu. Cras faucibus elementum convallis. Duis ac fringilla odio.
+							Suspendisse sed lorem commodo leo porttitor fringilla quis sit amet eros. Pellentesque habitant morbi tristique senectus
+							et netus et malesuada fames ac turpis egestas. Curabitur scelerisque vulputate venenatis. Nulla vulputate pulvinar euismod. Phasellus id.
+							<a href="#" class="text-right">...&gt;</a>
+							</p>
+						</div>
+						
+						<div class="container-fluid" style="margin-top:30px">
+							<h4 class="text-center">Lorem ipsum dolor sit amet.</h4>
+							<p class="font-weight-light">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus imperdiet magna ut tincidunt.
+							Vivamus dui ante, pretium ornare posuere id, sodales et nisi. Integer non mauris tincidunt, efficitur neque et,
+							aliquet risus. Proin aliquet, lectus ac porta porttitor, justo mi interdum felis, interdum aliquam ligula risus vitae purus.
+							Mauris lobortis urna tortor, at porttitor tortor pretium eu. Cras faucibus elementum convallis. Duis ac fringilla odio.
+							Suspendisse sed lorem commodo leo porttitor fringilla quis sit amet eros. Pellentesque habitant morbi tristique senectus
+							et netus et malesuada fames ac turpis egestas. Curabitur scelerisque vulputate venenatis. Nulla vulputate pulvinar euismod. Phasellus id.
+							<a href="#" class="text-right">...&gt;</a>
+							</p>
+						</div>
+						
+						<div class="container-fluid" style="margin-top:30px">
+							<h4 class="text-center">Lorem ipsum dolor sit amet.</h4>
+							<p class="font-weight-light">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus imperdiet magna ut tincidunt.
+							Vivamus dui ante, pretium ornare posuere id, sodales et nisi. Integer non mauris tincidunt, efficitur neque et,
+							aliquet risus. Proin aliquet, lectus ac porta porttitor, justo mi interdum felis, interdum aliquam ligula risus vitae purus.
+							Mauris lobortis urna tortor, at porttitor tortor pretium eu. Cras faucibus elementum convallis. Duis ac fringilla odio.
+							Suspendisse sed lorem commodo leo porttitor fringilla quis sit amet eros. Pellentesque habitant morbi tristique senectus
+							et netus et malesuada fames ac turpis egestas. Curabitur scelerisque vulputate venenatis. Nulla vulputate pulvinar euismod. Phasellus id.
+							<a href="#" class="text-right">...&gt;</a>
+							</p>
+						</div>
+						
+						<div class="container-fluid" style="margin-top:30px">
+							<h4 class="text-center">Lorem ipsum dolor sit amet.</h4>
+							<p class="font-weight-light">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam faucibus imperdiet magna ut tincidunt.
+							Vivamus dui ante, pretium ornare posuere id, sodales et nisi. Integer non mauris tincidunt, efficitur neque et,
+							aliquet risus. Proin aliquet, lectus ac porta porttitor, justo mi interdum felis, interdum aliquam ligula risus vitae purus.
+							Mauris lobortis urna tortor, at porttitor tortor pretium eu. Cras faucibus elementum convallis. Duis ac fringilla odio.
+							Suspendisse sed lorem commodo leo porttitor fringilla quis sit amet eros. Pellentesque habitant morbi tristique senectus
+							et netus et malesuada fames ac turpis egestas. Curabitur scelerisque vulputate venenatis. Nulla vulputate pulvinar euismod. Phasellus id.
+							<a href="#" class="text-right">...&gt;</a>
+							</p>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-sm-3 order-first">
+					<h5 align="center">Treningi w tym tygodniu</h5>
+					<div class="container-fluid">
+						<table class="table">
+							<th colspan="2" class="text-center thread-dark">Poniedziałek</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Wtorek</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Środa</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+												<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Czwartek</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Piątek</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Sobota</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+							<th colspan="2" class="text-center">Niedziela</th>
+							<tr>
+								<td class="py-1">12:00-13:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla dzieci gr. 1</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">14:00-15:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Kurs samoobrony dla kobiet</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">16:00-17:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla początkujących</a></td>
+							</tr>
+							<tr>
+								<td class="py-1">18:00-19:30</td>
+								<td class="py-1"><a href="#" class="text-muted">Judo dla zaawansowanych</a></td>
+							</tr>
+						</table>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endblock %}
+	
+		
+	<script src="js/scripts.js"></script>
+</body>
+</html>
