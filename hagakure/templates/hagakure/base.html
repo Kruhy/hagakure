@@ -69,13 +69,13 @@
                                             {{ name }}
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#">Mój Profil</a>
+                                            <a class="dropdown-item" href="{% url 'user_details' %}">Mój Profil</a>
                                             <a class="dropdown-item" href="#">Moje treningi</a>
                                             <a class="dropdown-item" href="#" hidden>Wiadomości</a>
 
                                             {% if user.is_superuser %}
                                                 <div class="dropdown-divider"> </div>
-                                                <a class="dropdown-item" href="#">Zarządzaj stroną</a>
+                                                <a class="dropdown-item" href="/admin/">Zarządzaj stroną</a>
                                                 <a class="dropdown-item" href="#">Dodaj Użytkownika</a>
                                             {% endif %}
 
@@ -86,7 +86,7 @@
                                             {% endif %}
 
                                             <div class="dropdown-divider"> </div>
-                                            <a class="dropdown-item" href="#">Wyloguj</a>
+                                            <a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>
                                             
                                         </div>
                                     {% else %}
@@ -134,7 +134,7 @@
         </div>
 
         {% block js %}
-            <script "{% static 'hagakure/js/scripts.js'%}"></script>
+            <script "{% static 'hagakure/js/scripts.js' %}"></script>
         {% endblock %}
 
     </body>
