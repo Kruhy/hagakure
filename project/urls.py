@@ -15,19 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from auth_ex.views import LogInView
 from hagakure.views import AboutView, ArticlesView, GalleriesView, GalleryDetailsView, LandingPageView, NewsView, TrainersView, TrainingsView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('register/', include('registration.urls')),
+    path('user/', include('auth_ex.urls')),
     path('', LandingPageView.as_view(), name='landing_page'),
     path('about/', AboutView.as_view(), name='about_us'),
     path('articles/', ArticlesView.as_view(), name='articles'),
     path('galleries/', GalleriesView.as_view(), name='galleries'),
     path('gellery/', GalleryDetailsView.as_view(), name='gallery_details'),
-    path('login/', LogInView.as_view(), name='login'),
     path('news/', NewsView.as_view(), name='news'),
     path('trainers/', TrainersView.as_view(), name='trainers'),
     path('trainings/', TrainingsView.as_view(), name='trainings'),

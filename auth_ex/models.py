@@ -45,7 +45,7 @@ class User(AbstractUser):
     phone_number = models.CharField(max_length=15)
     ice_contact_name = models.CharField(max_length=64)
     ice_contact_number = models.CharField(max_length=15)
-    birth_date = models.DateField(null=True)
+    birth_date = models.DateField(null=True, blank=True)
     nick = models.CharField(max_length=32, blank=True)
 
     USERNAME_FIELD = 'email'
