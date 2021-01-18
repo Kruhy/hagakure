@@ -19,13 +19,13 @@ class LogInView(View):
 
         form = LogInForm(request.POST)
 
-        #TODO: fix cleaned_data!
+        #TODO: find out how to use AuthenticateForm with email field as username!
 
         # import pdb; pdb.set_trace()
 
-        # if form.is_valid():
-            
+        # if form.is_valid():    
         #     data = form.cleaned_data
+        #     user = authenticate(request, email=data['email'], password=data['password'])
 
         data = form.data
         user = authenticate(request, email=data['email'], password=data['password'])

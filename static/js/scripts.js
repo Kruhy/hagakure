@@ -1,4 +1,4 @@
-$(".reveal").on('click',function() {
+$("#reveal").on('click',function() {
     var pwd = this.parentElement.parentElement.querySelector('.pwd');
     if (pwd.type === 'password') {
         pwd.type = 'text';
