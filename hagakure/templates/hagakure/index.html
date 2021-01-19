@@ -2,8 +2,8 @@
 {% load static %}
 	{% block header %}
 		<header>
-			<div class="card" style="height:500px" id="banner">
-				<div class="card-img-overlay">
+			<div class="card border-0" style="height:500px" id="banner">
+				<div class="card-img-overlay border-bottom border-secondary">
 					<div class="container-fluid">
 						<div class="row my-4">
 							<div class="col align-self-center text-right">
@@ -30,7 +30,7 @@
 							<a class="nav-link" href="{% url 'news' %}">Aktualności</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{% url 'trainings' %}">Treningi</a>
+							<a class="nav-link" href="{% url 'trainings_list' %}">Treningi</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{% url 'articles' %}">Artykuły</a>
@@ -58,7 +58,7 @@
 
 								<div class="dropdown-menu dropdown-menu-right">
 									<a class="dropdown-item" href="{% url 'user_details' %}">Mój Profil</a>
-									<a class="dropdown-item" href="#">Moje treningi</a>
+									<a class="dropdown-item" href="{% url 'my_trainings' %}">Moje treningi</a>
 									<a class="dropdown-item" href="#" hidden>Wiadomości</a>
 
 									{% if user.is_superuser %}

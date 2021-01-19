@@ -11,7 +11,8 @@
   }
   
 #content-wrap {
-    padding-bottom: 8.25rem;    /* Footer height */
+  padding-top: 3.6rem;          /* navbar height */
+  padding-bottom: 8.25rem;    /* Footer height */
   }
   
 #footer {

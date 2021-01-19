@@ -1,0 +1,369 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% load trainings_extras %}
+{% block body %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Moje Treningi</h1>
+        <ul class="nav justify-content-center border-bottom border-dark">
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Pokaż Bieżace</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Pokaż Wszystkie</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Pokaż Zakończone</a>
+            </li>
+            <li class="nav-item">
+                <a class="btn btn-light" href="#">Pokaż Przyszłe</a>
+            </li>
+        </ul>
+        {% if trainings_trainee and trainings_trainer %}
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="btn btn-light" href="#trainer">Jako Trener</a>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-light" href="#trainee">Jako Trenuący</a>
+                </li>
+            </ul>
+        {% endif %}
+    </div>
+    
+    <div class="container-fluid">
+        {% if trainings_trainer %}
+            {% if trainings_trainee %}
+                <div class="container-fluid border bg-danger text-white" id="trainer">
+                    <div class="row justify-content-center" style="margin:30px">
+                        <h2>Jako Trener</h2>
+                    </div>
+                </div>
+            {% endif %}
+            {% for training in trainings_trainer %}
+                <div class="container-fluid border">
+                    <div class="row justify-content-center" style="margin-top:30px">
+                        <div class="col-sm-8 text-center">
+                            <h2> {{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
+                            <h5 style="margin-bottom:15px">
+                                {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
+                            </h5>
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="col-sm-2">Dojo</th>
+                                        <th class="col-sm-2">Tremin</th>
+                                        <th class="col-sm-2">Dni tygodnia</th>
+                                        <th class="col-sm-2">Godzina rozpoczęcia</th>
+                                        <th class="col-sm-2">Długść</th>
+                                        <th class="col-sm-2">Trener</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-body">
+                                                {{ training.dojo }}
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ training.start_date|date:"d-m-Y" }}
+                                            <br>
+                                            {{ training.end_date|date:"d-m-Y" }}  
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for weekday in training.weekdays.all %}
+
+                                                {{ weekday.name }}
+
+                                                {%if not forloop.last%}<br>{%endif%}
+
+                                            {% endfor %}
+                                        </td>
+                                        <td class="align-middle"> 
+                                            {{ training.start_hour|date:"H:i"  }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ training.lenght }} 
+                                            minut
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-body">
+                                                {{ training.trainer }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center my-3">
+                        <div class="col-sm-9 text-center border my-3">
+                            <div class="my-3">
+                                <h4>Wiadomości:</h4>
+                            </div>
+                            <div id="table-responsive" style="margin-bottom:30px">
+                                <table class="table table-bordered">
+                                    <thead class="thead-light" id="responsive">
+                                        <tr>
+                                            <th class="col-sm-2">Autor</th>
+                                            <th class="col-sm-2">Dodano</th>
+                                            <th class="col-sm-8">Treść</th>
+                                        <tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-secondary">
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr class="table-secondary">
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% if training.end_date|add_days:30 > today_date %}
+                                <div class="my-3">
+                                    <h4>Dodaj wiadomość:</h4>
+                                </div>
+                                <div class="container">
+                                    <form action="/" class="form" method="POST">
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor{{ training.pk }}">
+                                                    Wiadomość
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+                <script>
+                    ClassicEditor
+                        .create( document.querySelector( '#editor{{ training.pk }}' ) )
+                        .then( editor => {
+                            window.editor{{ training.pk }} = editor;
+                        } )
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                </script>
+
+            {% endfor %}
+        {% endif %}
+
+        {% if trainings_trainee %}
+            {% if trainings_trainer %}
+                <div class="container-fluid border bg-danger text-white" id="trainee">
+                    <div class="row justify-content-center" style="margin:30px">
+                        <h2>Jako Trenujący</h2>
+                    </div>
+                </div>
+            {% endif %}
+            {% for training in trainings_trainee %}
+                <div class="container-fluid border">
+                    <div class="row justify-content-center" style="margin-top:30px">
+                        <div class="col-sm-8 text-center">
+                            <h2> {{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
+                            <h5 style="margin-bottom:15px">
+                                {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
+                            </h5>
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th class="col-sm-2">Dojo</th>
+                                        <th class="col-sm-2">Tremin</th>
+                                        <th class="col-sm-2">Dni tygodnia</th>
+                                        <th class="col-sm-2">Godzina rozpoczęcia</th>
+                                        <th class="col-sm-2">Długść</th>
+                                        <th class="col-sm-2">Trener</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-body">
+                                                {{ training.dojo }}
+                                            </a>
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ training.start_date|date:"d-m-Y" }}
+                                            <br>
+                                            {{ training.end_date|date:"d-m-Y" }}  
+                                        </td>
+                                        <td class="align-middle">
+                                            {% for weekday in training.weekdays.all %}
+
+                                                {{ weekday.name }}
+
+                                                {%if not forloop.last%}<br>{%endif%}
+
+                                            {% endfor %}
+                                        </td>
+                                        <td class="align-middle"> 
+                                            {{ training.start_hour|date:"H:i"  }}
+                                        </td>
+                                        <td class="align-middle">
+                                            {{ training.lenght }} 
+                                            minut
+                                        </td>
+                                        <td class="align-middle">
+                                            <a href="#" class="text-body">
+                                                {{ training.trainer }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center my-3">
+                        <div class="col-sm-9 text-center border my-3">
+                            <div class="my-3">
+                                <h4>Wiadomości:</h4>
+                            </div>
+                            <div id="table-responsive" style="margin-bottom:30px">
+                                <table class="table table-bordered">
+                                    <thead class="thead-light" id="responsive">
+                                        <tr>
+                                            <th class="col-sm-2">Autor</th>
+                                            <th class="col-sm-2">Dodano</th>
+                                            <th class="col-sm-8">Treść</th>
+                                        <tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="table-secondary">
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr class="table-secondary">
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th class="col-sm-2 align-middle">GalAn</th>
+                                            <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
+                                            <td class="col-sm-8 text-left">
+                                                {% lorem %}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            {% if training.end_date|add_days:30 > today_date %}
+                                <div class="my-3">
+                                    <h4>Dodaj wiadomość:</h4>
+                                </div>
+                                <div class="container">
+                                    <form action="/" class="form" method="POST">
+                                        <div class="form-group row">
+                                            <div class="col">
+                                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor{{ training.pk }}">
+                                                    Wiadomość
+                                                </textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            
+                <script>
+                    ClassicEditor
+                        .create( document.querySelector( '#editor{{ training.pk }}' ) )
+                        .then( editor => {
+                            window.editor{{ training.pk }} = editor;
+                        } )
+                        .catch( error => {
+                            console.error( error );
+                        } );
+                </script>
+
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,14 +1,14 @@
 from django.contrib import admin
 
-from .models import AgeCategory, Discipline, Dojo, Training, Weekday
+from .models import AgeCategory, Discipline, Dojo, Level, Training, Weekday
 
 
 class AgeCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'description',)
 
 
 class DisciplineAdmin(admin.ModelAdmin):
-    list_display = ('name',)
+    list_display = ('name', 'description',)
 
 
 class DojoAdmin(admin.ModelAdmin):
@@ -23,8 +23,13 @@ class WeekdayAdmin(admin.ModelAdmin):
     list_display = ('order', 'name',)
 
 
+class LevelAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description',)
+
+
 admin.site.register(AgeCategory, AgeCategoryAdmin)
 admin.site.register(Discipline, DisciplineAdmin)
 admin.site.register(Dojo, DojoAdmin)
 admin.site.register(Training, TrainingAdmin)
 admin.site.register(Weekday, WeekdayAdmin)
+admin.site.register(Level, LevelAdmin)

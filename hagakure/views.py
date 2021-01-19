@@ -2,6 +2,8 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from django.views import View
 
+from utils.functions import display_name
+
 User = get_user_model()
 
 class LandingPageView(View):
@@ -14,17 +16,13 @@ class LandingPageView(View):
 
 class AboutView(View):
     def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/about_us.html')
+        context = {'name': display_name(request.user), }
+        return render(request, 'hagakure/about_us.html', context)
 
 
 class NewsView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'hagakure/news.html')
-
-
-class TrainingsView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/trainings.html')
 
 
 class ArticlesView(View):
@@ -45,14 +43,3 @@ class TrainersView(View):
 class GalleryDetailsView(View):
     def get(self, request, *args, **kwargs):
             return render(request, 'hagakure/gallery_details.html')
-
-
-def display_name(active_user):
-    if active_user.is_authenticated:
-        if active_user.nick:
-            display_name = active_user.nick
-        else:
-            display_name = active_user.first_name
-
-        return display_name
-    return None

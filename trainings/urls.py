@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path
+from .views import MyTrainingsView, TrainingsListView
 
 urlpatterns = [
+    path('my_trainings/', login_required(MyTrainingsView.as_view()), name='my_trainings'),
+    path('list/', TrainingsListView.as_view(), name='trainings_list'),
 ]
