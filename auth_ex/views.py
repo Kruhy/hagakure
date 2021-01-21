@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.hashers import check_password
@@ -5,6 +6,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from .forms import ChageEmailForm, LogInForm, UserDetailsForm, VerifyPasswordForm
+from trainings.models import Training
+from utils.functions import display_name
 
 
 User = get_user_model()
@@ -50,6 +53,9 @@ class UserDetailsView(View):
 
     def get(self, request, *args, **kwargs):
         
+        trainings_list_trainee = Training.objects.filter(trainees=request.user.pk, start_date__lte=date.today(), end_date__gte=date.today())
+        trainings_list_trainer = Training.objects.filter(trainer=request.user.pk, start_date__lte=date.today(), end_date__gte=date.today())
+
         context = {
             'name': display_name(request.user),
             'first_name': request.user.first_name,
@@ -61,6 +67,8 @@ class UserDetailsView(View):
             'ice_phone': request.user.ice_contact_number,
             'birth_date': request.user.birth_date,
             'register_date': request.user.date_joined,
+            'trainings_list_trainee': trainings_list_trainee,
+            'trainings_list_trainer': trainings_list_trainer,
         }
         return render(request, 'auth_ex/user_details.html', context)
 
@@ -189,14 +197,3 @@ class ChangePasswordView(View):
         messages.error(request, 'Niepoprawne hasło! Spróbój ponownie!')
         return redirect('change_password') 
 
-
-
-def display_name(active_user):
-    if active_user.is_authenticated:
-        if active_user.nick:
-            display_name = active_user.nick
-        else:
-            display_name = active_user.first_name
-
-        return display_name
-    return None

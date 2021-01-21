@@ -11,7 +11,8 @@
   }
   
 #content-wrap {
-    padding-bottom: 8.25rem;    /* Footer height */
+  padding-top: 3.6rem;          /* navbar height */
+  padding-bottom: 8.25rem;    /* Footer height */
   }
   
 #footer {
@@ -26,6 +27,7 @@
   background-size: contain;
   background-position: center;
   background-color:#f7f7f7;
+  height: 500px;
 }
 #table-responsive {
   height:300px;
@@ -39,4 +41,8 @@ thead#responsive tr:nth-child(1) th {
 #gallery{
   width: 400px;
   height: auto;
+}
+
+div:target{
+  scroll-margin-top: 3.6rem; 
 }

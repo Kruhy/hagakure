@@ -59,7 +59,7 @@
                         <tr>
                             <th class="col-sm-3 align-middle table-secondary">Telefon ICE:</th>
                             <td class="col-sm-9 align-middle">
-                                {{ ice_phone}}
+                                {{ ice_phone }}
                             </td>
                         </tr>
                         <tr>
@@ -75,20 +75,45 @@
                             </td>
                         </tr>
                         <tr>
-                            <th class="col-sm-3 align-middle table-secondary">Moje trenigni:</th>
+                            <th class="col-sm-3 align-middle table-secondary">Moje treningni:</th>
                             <td class="col-sm-9 align-middle">
-                                <ul>
-                                    <li>
-                                        <a href="#" class="text-body">
-                                            Judo Tradycyjne Dorośli
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="text-body">
-                                            Joga
-                                        </a>
-                                    </li>
-                                </ul>
+                                {% if trainings_list_trainer %}
+                                    <ul>
+                                        {% for training in trainings_list_trainer %}
+                                            <li>
+                                                <a href="#" class="text-body font-weight-bold">
+                                                    {{ training.discipline }} - 
+                                                    {{ training.dojo }} - 
+                                                    {% for weekday in training.weekdays.all %}
+                                                        {{ weekday.name|slice:"0:2" }}
+                                                        {%if not forloop.last%}/{%endif%}
+                                                    {% endfor %}
+                                                    - 
+                                                    {{ training.start_hour|date:'H:i' }} 
+                                                    (Trener)
+                                                </a>
+                                            </li>
+                                        {% endfor %}                              
+                                    </ul>
+                                {% endif %}
+                                {% if trainings_list_trainee %}
+                                    <ul>
+                                        {% for training in trainings_list_trainee %}
+                                            <li>
+                                                <a href="#" class="text-body">
+                                                    {{ training.discipline }} - 
+                                                    {{ training.dojo }} - 
+                                                    {% for weekday in training.weekdays.all %}
+                                                        {{ weekday.name|slice:"0:2" }}
+                                                        {%if not forloop.last%}/{%endif%}
+                                                    {% endfor %}
+                                                    - 
+                                                    {{ training.start_hour|date:'H:i' }} 
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}                            
                             </td>
                         </tr>
                     </tbody>
