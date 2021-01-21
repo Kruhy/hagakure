@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views import View
 
 from utils.functions import display_name
-from .models import Article
+from .models import Article, ArticleCategory
 
 
 class AllArticlesView(View):
@@ -11,10 +11,12 @@ class AllArticlesView(View):
     def get(self, request, *args, **kwargs):
 
         articles = Article.objects.all().order_by('created_on')
+        categories = ArticleCategory.objects.all().order_by('name')
 
         context = {
             'name': display_name(request.user),
             'articles': articles,
+            'categories': categories
         }
 
         return render(request, 'articles/articles.html', context)

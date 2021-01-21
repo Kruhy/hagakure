@@ -8,7 +8,7 @@ User = get_user_model()
 
 
 class ArticleCategory(models.Model):
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
 
     def __str__(self):
         return self.name
@@ -16,7 +16,7 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=128)
-    category = models.ForeignKey(ArticleCategory, on_delete=models.CASCADE)
+    category = models.ManyToManyField(ArticleCategory)
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=False)

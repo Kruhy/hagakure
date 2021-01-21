@@ -8,18 +8,11 @@
             <li class="nav-item">
                 <a class="btn btn-light" href="#">Wszystkie</a>
             </li>
+            {% for category in categories %}
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Historia</a>
+                <a class="btn btn-light" href="#">{{ category.name }}</a>
             </li>
-            <li class="nav-item">
-                <a class="btn btn-light" href="#">Techniki</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-light" href="#">Japonia</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-light" href="#">Sztuki Walki</a>
-            </li>
+            {% endfor %}
         </ul> 
     </div>
 
@@ -49,7 +42,7 @@
                                     <div class="text-left">
                                         
                                         <p>
-                                            {{ article.body|truncatewords:100  }}
+                                            {{ article.body|safe|truncatewords:100  }}
                                         </p>
                                         
                                     </div>

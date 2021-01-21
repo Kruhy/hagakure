@@ -98,45 +98,17 @@
 				
 					<h5 class="text-center">Najnowsze artykuły</h5>
 					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					
+					{% for article in articles %}
+						<div class="container-fluid" style="margin-top:20px">
+							<a href="{{ article.get_absolute_url }}" class="text-body">
+								<p class="font-weight-bold text-center">
+									{{ article.title }}
+								</p>
+								{{ article.body|safe|truncatewords:30 }}
+							</a>
+						</div>
+					{% endfor %}		
+								
 				</div>
 				<div class="col-sm-7 border-left border-right border-dark">
 					<h3 class="text-center">Aktualności</h3>

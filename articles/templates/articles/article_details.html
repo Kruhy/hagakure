@@ -17,16 +17,22 @@
         </div>
     {% endif %}
 
-    <div class ="container-fluid p-3 text-center border-top border-bottom border-dark">
+    <div class="container-fluid p-3 text-center border-top border-bottom border-dark">
         <h1>{{ article.title }}</h1>
-        <h6>Autor: {{ article.author }}</h6> 
+        <h5>Autor: {{ article.author }}</h5>
+        <small>
+            {% for category in article.category.all %}
+                {{ category.name }}
+                {%if not forloop.last%}, {%endif%}
+            {% endfor %}
+        </small>
     </div>
     
     <div class="row" style="margin-top:20px">
         <div class="col-sm-2">
         </div>
         <div class="col-sm-8 text-left">
-            {{ article.body }}
+            {{ article.body|safe }}
         </div>
         <div class="col-sm-2">
         </div>
