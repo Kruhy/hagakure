@@ -68,10 +68,13 @@
 									{% endif %}
 
 									{% if user.is_staff %}
-										<div class="dropdown-divider"> </div>
-										<a class="dropdown-item" href="#">Dodaj artykuł</a>
-										<a class="dropdown-item" hfer="#">Dodaj aktualności</a>
-									{% endif %}
+                                            <div class="dropdown-divider"> </div>
+                                            <a class="dropdown-item" href="{% url 'article_list' %}">Zarządzaj artykułami</a>
+                                            <a class="dropdown-item" href="#">Dodaj artykuł</a>
+                                            <div class="dropdown-divider"> </div>
+                                            <a class="dropdown-item" href="#">Zarządzaj aktualnościami</a>
+                                            <a class="dropdown-item" hfer="#">Dodaj aktualności</a>
+                                        {% endif %}
 
 									<div class="dropdown-divider"> </div>
 									<a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>                                            

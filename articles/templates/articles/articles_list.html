@@ -1,0 +1,71 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Wszystkie artykuły</h1>
+    </div>
+
+    <div class="container-fluid" style="margin-top:30px">
+        <table class="table table-hover">
+            <thead class="text-center">
+                <tr>
+                    <th>Tytuł</th>
+                    <th>Fragment</th>
+                    <th>Kategoria</th>
+                    <th>Autor</th>
+                    <th><abbr title="Tak = widoczny na stronie">Opublikowany</abbr></th>
+                    <th><abbr title="Tak = widoczny również dla niezalogowanych">Publiczny</abbr></th>
+                    <th>Opcje</th>
+                </tr>
+            </thead>
+            
+            <tbody class="text-left">
+                {% for article in articles %}
+                    <tr>
+                        <td class="align-middle">{{ article.title }}</td>
+                        <td class="align-middle">
+                        {{ article.body|truncatewords:20 }}
+                        </td>
+                        <td class="align-middle text-center"> {{ article.category }}</td>
+                        <td class="align-middle text-center"> {{ article.author }}</td>
+                        <td class="align-middle text-center">
+                            {% if article.is_published %}
+                                Tak
+                            {% else %}
+                                Nie
+                            {% endif %}
+                        </td>
+                        <td class="align-middle text-center">
+                            {% if article.is_public %}
+                                Tak
+                            {% else %}
+                                Nie
+                            {% endif %}
+                        </td>
+                        <td class="align-middle">
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+                                    Więcej
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="{{ article.get_absolute_url }}">Zobacz</a>
+                                    <a class="dropdown-item" href="#">Edytuj</a>
+                                    {% if article.is_published %}
+                                        <a class="dropdown-item" href="#">Usuń ze strony</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Opublikuj</a>
+                                    {% endif %}
+                                    {% if article.is_public %}
+                                        <a class="dropdown-item" href="#">Oznacz jako prywatny</a>
+                                    {% else %}
+                                        <a class="dropdown-item" href="#">Oznacz jako publiczny</a>
+                                    {% endif %}                                       
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+{% endblock %}
