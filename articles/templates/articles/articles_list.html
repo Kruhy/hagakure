@@ -7,65 +7,87 @@
     </div>
 
     <div class="container-fluid" style="margin-top:30px">
-        <table class="table table-hover">
-            <thead class="text-center">
-                <tr>
-                    <th>Tytuł</th>
-                    <th>Fragment</th>
-                    <th>Kategoria</th>
-                    <th>Autor</th>
-                    <th><abbr title="Tak = widoczny na stronie">Opublikowany</abbr></th>
-                    <th><abbr title="Tak = widoczny również dla niezalogowanych">Publiczny</abbr></th>
-                    <th>Opcje</th>
-                </tr>
-            </thead>
-            
-            <tbody class="text-left">
-                {% for article in articles %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table class="table table-hover">
+                <thead class="text-center">
                     <tr>
-                        <td class="align-middle">{{ article.title }}</td>
-                        <td class="align-middle">
-                        {{ article.body|truncatewords:20 }}
-                        </td>
-                        <td class="align-middle text-center"> {{ article.category }}</td>
-                        <td class="align-middle text-center"> {{ article.author }}</td>
-                        <td class="align-middle text-center">
-                            {% if article.is_published %}
-                                Tak
-                            {% else %}
-                                Nie
-                            {% endif %}
-                        </td>
-                        <td class="align-middle text-center">
-                            {% if article.is_public %}
-                                Tak
-                            {% else %}
-                                Nie
-                            {% endif %}
-                        </td>
-                        <td class="align-middle">
-                            <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">
-                                    Więcej
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ article.get_absolute_url }}">Zobacz</a>
-                                    <a class="dropdown-item" href="#">Edytuj</a>
-                                    {% if article.is_published %}
-                                        <a class="dropdown-item" href="#">Usuń ze strony</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Opublikuj</a>
-                                    {% endif %}
-                                    {% if article.is_public %}
-                                        <a class="dropdown-item" href="#">Oznacz jako prywatny</a>
-                                    {% else %}
-                                        <a class="dropdown-item" href="#">Oznacz jako publiczny</a>
-                                    {% endif %}                                       
-                                </div>
+                        <th class="col-sm-2">Tytuł</th>
+                        <th class="col-sm-6">Fragment</th>
+                        <th class="col-sm-1">Autor</th>
+                        <th class="col-sm-1">Status</th>
+                        <th class="col-sm-1">Opcje</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="text-left">
+                    
+                    {% for article in articles %}
+                    
+                        <tr>
+                            
+                            <td class="align-middle">
+                                <a class="text-body" href="{{ article.get_absolute_url }}" target="_blank">
+                                    {{ article.title }}
+                                </a>
+                                
+                            </td>
+                            <td class="align-middle">
+                                <a class="text-body" href="{{ article.get_absolute_url }}" target="_blank">
+                                    {{ article.body|safe|truncatewords:30 }}
+                                </a>
+                            </td>
+                            
+                            <td class="align-middle text-center"> {{ article.author }}</td>
+                            <td class="align-middle text-left">
+                                
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="{{ article.pk }}"
+                                            id="published"
+                                            {% if article.is_published %}
+                                                checked
+                                            {% endif %}
+                                            name="is_published"
+                                        >
+                                        <label class="form-check-label" for="published">
+                                            Opublikowany
+                                        </label>
+                                    </div>
+
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            value="{{ article.pk }}" 
+                                            id="public"
+                                            {% if article.is_public %}
+                                                checked
+                                            {% endif %}
+                                            name="is_public"
+                                        >
+                                        <label class="form-check-label" for="public">
+                                            Publiczny
+                                        </label>
+                                    </div>
+                                </div<
+                            </td>
+                            <td class="align-middle text-center">
+                                <a class="btn btn-secondary" href="#" target="_blank">Edytuj</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="5">
+                            <div class="container-fluid text-right">
+                                <button type="submit" class="btn btn-danger">Zapisz zmiany</button>
                             </div>
                         </td>
                     </tr>
-                {% endfor %}
-            </tbody>
+                </tbody>
+            </table>
+        </form>
 
 {% endblock %}

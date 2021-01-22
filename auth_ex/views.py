@@ -16,15 +16,19 @@ User = get_user_model()
 class LogInView(View):
 
     def get(self, request, *args, **kwargs):
-        return render(request, 'auth_ex/login.html')
+        context = {
+            'next': request.GET.get('next'),
+        }
+        return render(request, 'auth_ex/login.html', context)
 
     def post(self, request, *args, **kwargs):
 
         form = LogInForm(request.POST)
+        next = request.POST.get('next', '/')
 
         #TODO: find out how to use AuthenticateForm with email field as username!
 
-        # import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
 
         # if form.is_valid():    
         #     data = form.cleaned_data
@@ -35,17 +39,18 @@ class LogInView(View):
 
         if user is not None:
             login(request, user)
-            return redirect('landing_page')
+            return redirect(next)
         else:
             messages.warning(request, 'Błędny adres email lub hasło!')
-            return render(request, 'auth_ex/login.html')
+            return redirect ('login')
 
 
 class LogOutView(View):
 
     def get(self, request, *args, **kwargs):
+        next = request.GET.get('next', '/')
         logout(request)
-        return redirect('landing_page')
+        return redirect(next)
 
 
 

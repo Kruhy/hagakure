@@ -1,8 +1,9 @@
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.views import View
 
 from utils.functions import display_name
+from .forms import ArticlePublicationStatusForm
 from .models import Article, ArticleCategory
 
 
@@ -20,6 +21,7 @@ class AllArticlesView(View):
         }
 
         return render(request, 'articles/articles.html', context)
+
 
 class ArticleView(View):
 
@@ -52,3 +54,25 @@ class ArticlesListView(View):
             }
 
         return render(request, 'articles/articles_list.html', context)
+
+    def post(self, request, *args, **kwargs):
+
+        articles = Article.objects.all()
+        
+        is_published_list =  request.POST.getlist('is_published')
+        is_public_list = request.POST.getlist('is_public')
+
+        for article in articles:
+            if str(article.pk) in is_published_list:
+                article.is_published = True
+            else:
+                article.is_published = False
+
+            if str(article.pk) in is_public_list:
+                article.is_public = True
+            else:
+                article.is_public = False
+            
+            article.save()
+
+        return redirect('article_list')
