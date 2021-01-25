@@ -1,0 +1,86 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Wszystkie Aktualności</h1>
+    </div>
+
+    <div class="container-fluid" style="margin-top:30px">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table class="table table-hover">
+                <thead class="text-center">
+                    <tr>
+                        <th class="col-sm-1">Tytuł</th>
+                        <th class="col-sm-6">Zawartość</th>
+                        <th class="col-sm-1">Data utworzenia</th>
+                        <th class="col-sm-1">Termin na stronie głównej</th>
+                        <th class="col-sm-1">Autor</th>
+                        <th class="col-sm-1">Status</th>
+                        <th class="col-sm-1">Opcje</th>
+                    </tr>
+                </thead>
+
+                <tbody class="text-left">
+                    {% for news in all_news %}
+                        <tr>
+                            <td class="align-middle">{{ news.title }}</td>
+                            <td class="align-middle">
+                                {{ news.body|safe }}
+                            </td>
+                            <td class="align-middle text-center">{{ news.created_on|date:"d-m-Y H:i" }}</td>
+                            <td class="align-middle text-center">
+                                <input type="date" name="exp_date?{{ news.pk }}" value="{{ news.expiration_date|date:"Y-m-d" }}">
+                            </td>
+                            <td class="align-middle text-center">{{ news.author }}</td>
+                            <td class="align-middle text-left">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ news.pk }}"
+                                        id="published"
+                                        {% if news.is_published %}
+                                            checked
+                                        {% endif %}
+                                        name="is_published"
+                                    >
+                                    <label class="form-check-label" for="published">
+                                        Opublikowany
+                                    </label>
+
+                                    <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ news.pk }}" 
+                                        id="public"
+                                        {% if news.is_public %}
+                                            checked
+                                        {% endif %}
+                                        name="is_public"
+                                    >
+                                    <label class="form-check-label" for="public">
+                                        Publiczny
+                                    </label>
+                                </div>
+                            </td>
+                            
+                            <td class="align-middle text-center">
+                                <a class="btn btn-secondary" href="#">Edytuj </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="7">
+                            <div class="container-fluid text-right">
+                                <button type="submit" class="btn btn-danger">Zapisz zmiany</button>
+                            </div>
+                        </td>
+                    <tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+{% endblock %}

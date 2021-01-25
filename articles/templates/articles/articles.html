@@ -28,13 +28,21 @@
                                     {% if not article.is_published %}
                                         <div class="bg-dark text-center text-white">
                                         <h5 class="pt-3 text-danger">Artykuł nie opublikowany na stronie</h5>
-                                        <p class="pb-3 text-danger">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
-                                        Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+                                        <p class="pb-3 text-danger">
+                                            <small>
+                                                Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                                Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.
+                                            </small>
+                                        </p>
                                     {% elif not article.is_public and user.is_staff %}
                                         <div class="bg-secondary text-center text-white">
                                         <h5 class="pt-3 text-dark">Artykuł widoczny tylko dla zalogowanych użytkowników</h5>
-                                        <p class="pb-3 text-dark">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
-                                        Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+                                        <p class="pb-3 text-dark">
+                                            <small>
+                                                Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                                Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.
+                                            </small>
+                                        </p>
                                     {% endif %}
 
                                     <div class="container-fluid pb-5 px-5 border">

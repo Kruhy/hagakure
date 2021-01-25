@@ -1,0 +1,85 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+{% now "d-m-Y" as today %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Aktualności</h1>
+    </div>
+    <div class="container-fluid" style="margin-top:30px">
+        <div class="row justify-content-center">
+            <div class="col-sm-1 text-center border-right border-left border-dark">
+                <h4>Filtruj</h4>
+                <p>
+                    2021 <br>
+                    2020
+                    
+                </p>
+            </div>
+            
+            <div class="col-sm-11 text-center border-right border-left border-dark">
+                
+                {% for news in all_news %}
+                    {% if news.is_published and news.expiration_date|date:"d-m-Y" > today or not news.expiration_date or user.is_staff %}
+
+                        {% if news.is_public or user.is_authenticated %}
+                            
+                            {% if not news.is_published %}
+                            <div class="bg-dark text-left text-white">
+                                <div class="pt-3 text-danger text-center border-bottom border-light">
+                                    <h5>Aktualność nie została jeszcze opublikowana na stronie.</h5>
+                                    <p class="pb-3">
+                                        <small>
+                                            Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                            Możesz zmienić widoczność aktualności wybierając "Zarządzaj aktualnościami" w Menu użytkownika.
+                                        </small>
+                                    </p>
+                                </div>
+                            {% elif user.is_staff and not news.is_public %}
+                            
+                            <div class="bg-secondary text-left text-dark">
+                                <div class="pt-3 text-dark text-center border-bottom border-light">
+                                    <h5>Aktualność widoczna tylko dla zalogowanych użytkowników.</h5>
+                                    <p class="pb-3">
+                                        <small>
+                                            Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                            Możesz zmienić widoczność aktualności wybierając "Zarządzaj aktualnościami" w Menu użytkownika.
+                                        </small>
+                                    </p>
+                                </div>
+                            {% elif news.expiration_date|date:"d-m-Y" < today and news.expiration_date %}
+                            
+                            <div class="bg-light text-left text-secondary">
+                                <div class="pt-3 text-center border-bottom border-light">
+                                    <h5>Aktualność jest przeterminowana i nie widoczna na stronie głównej.</h5>
+                                    <p class="pb-3">
+                                        <small>
+                                            Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                            Możesz zmienić termin wyświetlania aktualności wybierając "Zarządzaj aktualnościami" w Menu użytkownika.
+                                        </small>
+                                    </p>
+                                </div>
+                            {% else %}
+                            <div class="text-left p-3 border border-light">
+                            {% endif %}
+                                <div class="text-center pt-3" id="{{ news.pk }}">
+                                    <h2>{{ news.title }}</h2>
+                                    <small class="pb-3">({{ news.created_on|date:"d-m-Y H:i" }})</small>
+                                </div>
+                                    <p>
+                                        {{ news.body|safe }}
+                                    </p>
+                                    <p class="text-right">
+                                        {{ news.author }}
+                                    </p>
+                            </div>
+
+                        {% endif %}
+
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
