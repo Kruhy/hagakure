@@ -76,3 +76,35 @@ class ArticlesListView(View):
             article.save()
 
         return redirect('article_list')
+
+
+class AddArticleView(View):
+
+    def get(self, request, *args, **kwargs):
+        categories = ArticleCategory.objects.all()
+        context = {
+            'name': display_name(request.user),
+            'categories': categories,
+        }
+        return render(request, 'articles/add_article.html', context)
+
+    def post(self, request, *args, **kwargs):
+        pass
+
+
+class EditArticleView(View):
+
+    def get(self, request, *args, **kwargs):
+        article_pk = kwargs['pk']
+        categories = ArticleCategory.objects.all()
+        article = Article.objects.filter(pk=article_pk).get()
+
+        context = {
+            'name': display_name(request.user),
+            'categories': categories,
+            'article': article,
+        }
+        return render(request, 'articles/edit_article.html', context)
+
+    def post(self, request, *args, **kwargs):
+        pass

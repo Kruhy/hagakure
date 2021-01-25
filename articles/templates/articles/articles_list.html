@@ -21,61 +21,59 @@
                 </thead>
                 
                 <tbody class="text-left">
-                    
                     {% for article in articles %}
-                    
                         <tr>
-                            
                             <td class="align-middle">
                                 <a class="text-body" href="{{ article.get_absolute_url }}" target="_blank">
                                     {{ article.title }}
                                 </a>
                                 
                             </td>
+
                             <td class="align-middle">
                                 <a class="text-body" href="{{ article.get_absolute_url }}" target="_blank">
                                     {{ article.body|safe|truncatewords:30 }}
                                 </a>
                             </td>
                             
-                            <td class="align-middle text-center"> {{ article.author }}</td>
-                            <td class="align-middle text-left">
-                                
-                                    <div class="form-check">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value="{{ article.pk }}"
-                                            id="published"
-                                            {% if article.is_published %}
-                                                checked
-                                            {% endif %}
-                                            name="is_published"
-                                        >
-                                        <label class="form-check-label" for="published">
-                                            Opublikowany
-                                        </label>
-                                    </div>
+                            <td class="align-middle text-center">{{ article.author }}</td>
 
-                                    <div class="form-check">
-                                        <input
-                                            class="form-check-input"
-                                            type="checkbox"
-                                            value="{{ article.pk }}" 
-                                            id="public"
-                                            {% if article.is_public %}
-                                                checked
-                                            {% endif %}
-                                            name="is_public"
-                                        >
-                                        <label class="form-check-label" for="public">
-                                            Publiczny
-                                        </label>
-                                    </div>
-                                </div<
+                            <td class="align-middle text-left">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ article.pk }}"
+                                        id="published"
+                                        {% if article.is_published %}
+                                            checked
+                                        {% endif %}
+                                        name="is_published"
+                                    >
+                                    <label class="form-check-label" for="published">
+                                        Opublikowany
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ article.pk }}" 
+                                        id="public"
+                                        {% if article.is_public %}
+                                            checked
+                                        {% endif %}
+                                        name="is_public"
+                                    >
+                                    <label class="form-check-label" for="public">
+                                        Publiczny
+                                    </label>
+                                </div>
                             </td>
+
                             <td class="align-middle text-center">
-                                <a class="btn btn-secondary" href="#" target="_blank">Edytuj</a>
+                                <a class="btn btn-secondary" href="{% url 'edit_article' article.pk %}">Edytuj </a>
                             </td>
                         </tr>
                     {% endfor %}

@@ -46,3 +46,15 @@ thead#responsive tr:nth-child(1) th {
 div:target{
   scroll-margin-top: 3.6rem; 
 }
+
+.filterDiv {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.ck-editor__editable_inline {
+  min-height: 400px;
+}

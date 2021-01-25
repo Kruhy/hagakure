@@ -3,7 +3,6 @@ from django.contrib.auth import get_user_model
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
-
 User = get_user_model()
 
 

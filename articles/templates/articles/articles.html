@@ -4,13 +4,13 @@
 
     <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
         <h1>Artykuły</h1>
-        <ul class="nav justify-content-center">
+        <ul class="nav justify-content-center" id="btn-container">
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Wszystkie</a>
+                <button class="btn btn-light active" onclick="filterSelection('all')" href="#">Wszystkie</button>
             </li>
             {% for category in categories %}
             <li class="nav-item">
-                <a class="btn btn-light" href="#">{{ category.name }}</a>
+                <button class="btn btn-light" onclick="filterSelection('{{ category.name }}')">{{ category.name }}</button>
             </li>
             {% endfor %}
         </ul> 
@@ -22,43 +22,45 @@
                 {% for article in articles %}
                     {% if article.is_published or user.is_staff %}
                         {% if article.is_public or user.is_authenticated %}
-                            <a class="text-decoration-none text-dark" href="{{ article.get_absolute_url }}">
+                            <div class="filterDiv {% for category in article.category.all %}{{ category.name }} {% endfor %}">
+                                <a class="text-decoration-none text-dark" href="{{ article.get_absolute_url }}">
 
-                                {% if not article.is_published %}
-                                    <div class="bg-dark text-center text-white">
-                                    <h5 class="pt-3 text-danger">Artykuł nie opublikowany na stronie</h5>
-                                    <p class="pb-3 text-danger">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
-                                    Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
-                                {% elif not article.is_public and user.is_staff %}
-                                    <div class="bg-secondary text-center text-white">
-                                    <h5 class="pt-3 text-dark">Artykuł widoczny tylko dla zalogowanych użytkowników</h5>
-                                    <p class="pb-3 text-dark">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
-                                    Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
-                                {% endif %}
+                                    {% if not article.is_published %}
+                                        <div class="bg-dark text-center text-white">
+                                        <h5 class="pt-3 text-danger">Artykuł nie opublikowany na stronie</h5>
+                                        <p class="pb-3 text-danger">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                        Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+                                    {% elif not article.is_public and user.is_staff %}
+                                        <div class="bg-secondary text-center text-white">
+                                        <h5 class="pt-3 text-dark">Artykuł widoczny tylko dla zalogowanych użytkowników</h5>
+                                        <p class="pb-3 text-dark">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+                                        Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+                                    {% endif %}
 
-                                <div class="container-fluid pb-5 px-5 border">
-                                    <h2 class="my-3">{{ article.title }}.</h2>
-                                    
-                                    <div class="text-left">
+                                    <div class="container-fluid pb-5 px-5 border">
+                                        <h2 class="my-3">{{ article.title }}.</h2>
                                         
-                                        <p>
-                                            {{ article.body|safe|truncatewords:100  }}
-                                        </p>
+                                        <div class="text-left">
+                                            
+                                            <p>
+                                                {{ article.body|safe|truncatewords:100  }}
+                                            </p>
+                                            
+                                        </div>
+
+                                        <div class="text-right">
+                                            Autor: {{ article.author }}
+                                        </div>
                                         
                                     </div>
 
-                                    <div class="text-right">
-                                        Autor: {{ article.author }}
-                                    </div>
-                                    
-                                </div>
-
-                                {% if not article.is_published %}
-                                    </div>
-                                {% elif not article.is_public and user.is_staff %}
-                                    </div>
-                                {% endif %}
-                            </a>
+                                    {% if not article.is_published %}
+                                        </div>
+                                    {% elif not article.is_public and user.is_staff %}
+                                        </div>
+                                    {% endif %}
+                                </a>
+                            </div>
                         {% endif %}
                     {% endif %}
                 {% endfor %}
