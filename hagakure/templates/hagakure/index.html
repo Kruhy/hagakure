@@ -68,18 +68,21 @@
 									{% endif %}
 
 									{% if user.is_staff %}
-										<div class="dropdown-divider"> </div>
-										<a class="dropdown-item" href="#">Dodaj artykuł</a>
-										<a class="dropdown-item" hfer="#">Dodaj aktualności</a>
-									{% endif %}
+                                            <div class="dropdown-divider"> </div>
+                                            <a class="dropdown-item" href="{% url 'article_list' %}">Zarządzaj artykułami</a>
+                                            <a class="dropdown-item" href="#">Dodaj artykuł</a>
+                                            <div class="dropdown-divider"> </div>
+                                            <a class="dropdown-item" href="#">Zarządzaj aktualnościami</a>
+                                            <a class="dropdown-item" hfer="#">Dodaj aktualności</a>
+                                        {% endif %}
 
 									<div class="dropdown-divider"> </div>
-									<a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>                                            
+									<a class="dropdown-item" href="{% url 'logout' %}?next={{request.path}}">Wyloguj</a>                                            
 								</div>
 
 							</div>
 						{% else %}
-							<a class="nav-link" href="{% url 'login' %}">
+							<a class="nav-link" href="{% url 'login' %}?next={{request.path}}">
 							<span class="glyphicon glyphicon-log-in"></span>Zaloguj</a>
 						{% endif %}
 					</ul>
@@ -95,45 +98,17 @@
 				
 					<h5 class="text-center">Najnowsze artykuły</h5>
 					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					
-					<div class="container-fluid" style="margin-top:20px">
-						<a href="#" class="text-body">
-							<p class="font-weight-bold text-center">
-								Lorem ipsum dolor sit amet.
-							</p>
-							{% lorem %}
-						</a>
-					</div>
-					
-					
+					{% for article in articles %}
+						<div class="container-fluid" style="margin-top:20px">
+							<a href="{{ article.get_absolute_url }}" class="text-body">
+								<p class="font-weight-bold text-center">
+									{{ article.title }}
+								</p>
+								{{ article.body|safe|truncatewords:30 }}
+							</a>
+						</div>
+					{% endfor %}		
+								
 				</div>
 				<div class="col-sm-7 border-left border-right border-dark">
 					<h3 class="text-center">Aktualności</h3>

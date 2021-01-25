@@ -6,6 +6,7 @@ from django.views import View
 from utils.functions import display_name
 
 from trainings.models import Training, Weekday
+from articles.models import Article
 
 User = get_user_model()
 
@@ -51,6 +52,11 @@ class LandingPageView(View):
             end_date__gte=week_beggining_date + timedelta(days=6),
             ).order_by('start_hour')
 
+        if request.user.is_authenticated:
+            articles = Article.objects.filter(is_published=True).order_by('-created_on')[:5]
+        else:
+            articles = Article.objects.filter(is_published=True, is_public=True).order_by('-created_on')[:5]
+
         context = {
             'name': display_name(request.user),
             'day1_trainings': day1_trainings,
@@ -61,6 +67,7 @@ class LandingPageView(View):
             'day6_trainings': day6_trainings,
             'day7_trainings': day7_trainings,
             'weekdays': weekdays,
+            'articles': articles,
         }
         return render(request, 'hagakure/index.html', context)
 

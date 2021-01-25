@@ -1,0 +1,41 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+    
+    {% if not article.is_published %}
+        <div class="container align-center bg-danger text-center text-white border">
+            <h5 class="pt-3">Artykuł nie opublikowany na stronie</h5>
+            <p class="pb-3">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+            Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+        </div>
+        
+    {% elif not article.is_public and user.is_staff %}
+        <div class="container align-center bg-secondary text-center text-dark  border border-danger">
+            <h5 class="pt-3">Artykuł widoczny tylko dla zalogowanych użytkowników</h5>
+            <p class="pb-3">Widzisz tę informację, bo masz uprawnienia do edycji zawartości strony.<br>
+            Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.</p>
+        </div>
+    {% endif %}
+
+    <div class="container-fluid p-3 text-center border-top border-bottom border-dark">
+        <h1>{{ article.title }}</h1>
+        <h5>Autor: {{ article.author }}</h5>
+        <small>
+            {% for category in article.category.all %}
+                {{ category.name }}
+                {%if not forloop.last%}, {%endif%}
+            {% endfor %}
+        </small>
+    </div>
+    
+    <div class="row" style="margin-top:20px">
+        <div class="col-sm-2">
+        </div>
+        <div class="col-sm-8 text-left">
+            {{ article.body|safe }}
+        </div>
+        <div class="col-sm-2">
+        </div>
+    </div>
+
+{% endblock %}

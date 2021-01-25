@@ -14,7 +14,7 @@
         {% endif %}
         <div class="row justify-content-center">
             <div class="col-sm-4 align-self-center text-center">
-                <form action="" class="form" method="POST">
+                <form action="?next={{ next }}" class="form" method="POST">
                     {% csrf_token %}
                     <table class="table table-borderless">
                         <tr>

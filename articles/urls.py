@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 
-from .views import MyTrainingsView, TrainingsListView
+from .views import AddArticleView, AllArticlesView, ArticleView, ArticlesListView, EditArticleView
+
 
 urlpatterns = [
-    path('my_trainings/', login_required(MyTrainingsView.as_view()), name='my_trainings'),
-    path('list/', TrainingsListView.as_view(), name='trainings_list'),
+    path('', AllArticlesView.as_view(), name='articles'),
+    path('<int:pk>/<slug:slug>', ArticleView.as_view(), name='article'),
+    path('add/', AddArticleView.as_view(), name='add_article'),
+    path('edit/<int:pk>/', EditArticleView.as_view(), name='edit_article'),
+    path('list/', ArticlesListView.as_view(), name='article_list'),
 ]
