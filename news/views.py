@@ -11,9 +11,14 @@ class AllNewsView(View):
 
     def get(self, request, *args, **kwargs):
         news = News.objects.all().order_by('-created_on')
+        creation_years = News.objects.dates('created_on','year', 'DESC')
+        creation_months = News.objects.dates('created_on','month', 'DESC')
+        
         context = {
             'name': display_name(request.user),
-            'all_news': news
+            'all_news': news,
+            'creation_years': creation_years,
+            'creation_months': creation_months,
         }
         return render(request, 'news/news.html', context)
 
