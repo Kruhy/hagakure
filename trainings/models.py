@@ -65,3 +65,13 @@ class Training(models.Model):
 
     def __str__(self):
         return "{} ({}, {} - {}, {})".format(self.discipline, self.dojo, self.start_date, self.end_date, self.start_hour.strftime("%H:%M"))
+
+
+class TrainerBio(models.Model):
+    trainer = models.ForeignKey(User, related_name='person', on_delete=models.CASCADE)
+    bio = models.TextField()
+    photo = models.ImageField(upload_to='img/trainers', default='img/no-avatar.png')
+    disciplines = models.ManyToManyField(Discipline)
+
+    def __str__(self):
+        return "{} {}".format(self.trainer.first_name, self.trainer.last_name)

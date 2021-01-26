@@ -1,0 +1,43 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Nasi trenerzy</h1>
+    </div>
+
+    <div class="container-fluid">
+		<div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+            <div class="col-sm-8">
+                <table class="table table-borderless">
+                    <tbody>
+                        {% for trainer in trainers %}
+                        <tr>
+                            <td class="col-3">
+                            </td>
+                            <td class="col-2 border">
+                                <img src="{{ trainer.photo.url }}" alt="zdjęcie trenera" style="height:300px">
+                            </td>
+                            <td class="col-3 align-middle">
+                                <h4>{{ trainer }}</h4>
+                                <h6>
+                                    {% for discipline in trainer.disciplines.all  %}
+                                        {{ discipline }}
+                                        {%if not forloop.last%}, {%endif%}
+                                    {% endfor %}
+                                </h6>
+                                <p>
+                                    {{ trainer.bio }}
+                                </p>
+                            </td>
+                            <td class="col-4">
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
