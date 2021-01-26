@@ -51,6 +51,10 @@ div:target{
   display: none;
 }
 
+.filterBtn {
+  display: none;
+}
+
 .show {
   display: block;
 }

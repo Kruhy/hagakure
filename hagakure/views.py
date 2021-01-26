@@ -7,8 +7,10 @@ from utils.functions import display_name
 
 from trainings.models import Training, Weekday
 from articles.models import Article
+from news.models import News
 
 User = get_user_model()
+
 
 class LandingPageView(View):
     def get(self, request, *args, **kwargs):
@@ -57,6 +59,11 @@ class LandingPageView(View):
         else:
             articles = Article.objects.filter(is_published=True, is_public=True).order_by('-created_on')[:5]
 
+        if request.user.is_authenticated:
+            news = News.objects.filter(is_published=True, expiration_date__lte=date.today()).order_by('-created_on')[:5]
+        else:
+            news = News.objects.filter(is_published=True, is_public=True, expiration_date__lte=date.today()).order_by('-created_on')[:5]
+
         context = {
             'name': display_name(request.user),
             'day1_trainings': day1_trainings,
@@ -68,6 +75,7 @@ class LandingPageView(View):
             'day7_trainings': day7_trainings,
             'weekdays': weekdays,
             'articles': articles,
+            'all_news': news,
         }
         return render(request, 'hagakure/index.html', context)
 
@@ -76,16 +84,6 @@ class AboutView(View):
     def get(self, request, *args, **kwargs):
         context = {'name': display_name(request.user), }
         return render(request, 'hagakure/about_us.html', context)
-
-
-class NewsView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/news.html')
-
-
-class ArticlesView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/articles.html')
 
 
 class GalleriesView(View):

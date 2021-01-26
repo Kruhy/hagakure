@@ -17,18 +17,18 @@ class LogInView(View):
 
     def get(self, request, *args, **kwargs):
         context = {
-            'next': request.GET.get('next'),
+            'next': request.GET.get('next','/'),
         }
         return render(request, 'auth_ex/login.html', context)
 
     def post(self, request, *args, **kwargs):
 
         form = LogInForm(request.POST)
-        next = request.POST.get('next', '/')
+        next = request.GET.get('next')
 
         #TODO: find out how to use AuthenticateForm with email field as username!
 
-        #import pdb; pdb.set_trace()
+        # import pdb; pdb.set_trace()
 
         # if form.is_valid():    
         #     data = form.cleaned_data

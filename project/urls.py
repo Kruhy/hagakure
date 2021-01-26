@@ -15,12 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from hagakure.views import AboutView, ArticlesView, GalleriesView, GalleryDetailsView, LandingPageView, NewsView, TrainersView
+from hagakure.views import AboutView, GalleriesView, GalleryDetailsView, LandingPageView, TrainersView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('articles/', include('articles.urls')),
+    path('news/', include('news.urls')),
     path('register/', include('registration.urls')),
     path('training/', include('trainings.urls')),
     path('user/', include('auth_ex.urls')),
@@ -28,6 +29,5 @@ urlpatterns = [
     path('about/', AboutView.as_view(), name='about_us'),
     path('galleries/', GalleriesView.as_view(), name='galleries'),
     path('gellery/', GalleryDetailsView.as_view(), name='gallery_details'),
-    path('news/', NewsView.as_view(), name='news'),
     path('trainers/', TrainersView.as_view(), name='trainers'),
 ]

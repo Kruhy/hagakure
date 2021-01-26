@@ -3,28 +3,32 @@
 {% block body %}
     <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
         <h1>Treningi</h1>
-        <ul class="nav justify-content-center">
+
+        <ul class="nav justify-content-center border-top border-bottom border-dark">
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Wszystkie</a>
-            </li>
-            {% for discipline in disiciplines%}
-                <li class="nav-item">
-                    <a class="btn btn-light" href="#"> {{ discipline }}</a>
-                </li>
-            {% endfor %}
-            <li class="nav-item">
-                <a class="btn btn-light" href="#">Dojo</a>
+                <a class="btn btn-light" href="{% url 'about_us'%}#dojo">Dojo</a>
             </li>
             <li class="nav-item">
                 <a class="btn btn-light" href="{% url 'trainers' %}">Trenerzy</a>
             </li>
         </ul> 
+
+        <ul class="nav justify-content-center mt-3">
+            <li class="nav-item">
+                <button class="btn btn-light active" onclick="filterSelection('all')">Wszystkie</button>
+            </li>
+            {% for discipline in disiciplines%}
+                <li class="nav-item">
+                    <button class="btn btn-light" onclick="filterSelection('{{ discipline }}')"> {{ discipline }}</button>
+                </li>
+            {% endfor %}
+        </ul>
+
     </div>
     <div class="container-fluid">
-		<div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+		<div class="row justify-content-center border-bottom border-dark mt-3">
             {% for training in trainings %}
-                
-                <div class="col-sm-8 text-center" id="{{ training.pk }}">
+                <div class="col-sm-8 text-center filterDiv {{ training.discipline }}" id="{{ training.pk }}">
                     <div class="container-fluid border">
 
                         <h2 style="margin-top:30px">

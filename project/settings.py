@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'articles',
     'auth_ex',
     'hagakure',
+    'news',
     'registration',
     'trainings',
 ]

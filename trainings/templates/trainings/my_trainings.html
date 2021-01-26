@@ -7,16 +7,17 @@
         <h1>Moje Treningi</h1>
         <ul class="nav justify-content-center border-bottom border-dark">
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Pokaż Bieżace</a>
+                <button class="btn btn-light" onclick="filterSelection('all')">Pokaż Wszystkie</button>
             </li>
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Pokaż Wszystkie</a>
+                <button class="btn btn-light" onclick="filterSelection('current')">Pokaż Bieżace</button>
+            </li>
+            
+            <li class="nav-item">
+                <button class="btn btn-light" onclick="filterSelection('past')">Pokaż Zakończone</button>
             </li>
             <li class="nav-item">
-                <a class="btn btn-light" href="#">Pokaż Zakończone</a>
-            </li>
-            <li class="nav-item">
-                <a class="btn btn-light" href="#">Pokaż Przyszłe</a>
+                <button class="btn btn-light" onclick="filterSelection('future')">Pokaż Przyszłe</button>
             </li>
         </ul>
         {% if trainings_trainee and trainings_trainer %}
@@ -41,10 +42,19 @@
                 </div>
             {% endif %}
             {% for training in trainings_trainer %}
-                <div class="container-fluid border">
+                <div class="container-fluid border filterDiv 
+                    {% if training.start_date < today_date and training.end_date > today_date %}
+                        current
+                    {% elif training.start_date > today_date %}
+                        future
+                    {% else %}
+                        past
+                    {% endif %}
+                ">
+                
                     <div class="row justify-content-center" style="margin-top:30px">
                         <div class="col-sm-8 text-center">
-                            <h2> {{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
+                            <h2>{{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
                             <h5 style="margin-bottom:15px">
                                 {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
                             </h5>
@@ -211,7 +221,7 @@
                 <div class="container-fluid border">
                     <div class="row justify-content-center" style="margin-top:30px">
                         <div class="col-sm-8 text-center">
-                            <h2> {{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
+                            <h2>{{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
                             <h5 style="margin-bottom:15px">
                                 {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
                             </h5>
