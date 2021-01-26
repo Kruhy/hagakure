@@ -131,7 +131,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Email Server Setup
 # TODO: EMAIL_HOST, EMAIL_HOST, EMSIL_HOST_USER filef in when available - in local_settings.py!

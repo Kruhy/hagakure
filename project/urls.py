@@ -13,9 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from hagakure.views import AboutView, GalleriesView, GalleryDetailsView, LandingPageView, TrainersView
+from hagakure.views import AboutView, GalleriesView, GalleryDetailsView, LandingPageView
 
 
 urlpatterns = [
@@ -29,5 +31,5 @@ urlpatterns = [
     path('about/', AboutView.as_view(), name='about_us'),
     path('galleries/', GalleriesView.as_view(), name='galleries'),
     path('gellery/', GalleryDetailsView.as_view(), name='gallery_details'),
-    path('trainers/', TrainersView.as_view(), name='trainers'),
-]
+    #TODO: change below in the production as per https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

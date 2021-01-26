@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.views import View
 
 from utils.functions import display_name
-from .models import Discipline, Training
+from .models import Discipline, Training, TrainerBio
 
 
 class MyTrainingsView(View):
@@ -34,3 +34,15 @@ class TrainingsListView(View):
         }
 
         return render(request, 'trainings/trainings.html', context)
+
+
+class TrainerBioView(View):
+    def get(self, request, *args, **kwargs):
+        trainer_bios = TrainerBio.objects.all()
+
+        context = {
+            'name': display_name(request.user),
+            'trainers': trainer_bios,
+        }
+
+        return render(request, 'trainings/trainers.html', context)        

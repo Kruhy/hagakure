@@ -91,11 +91,6 @@ class GalleriesView(View):
         return render(request, 'hagakure/galleires_list.html')
 
 
-class TrainersView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/trainers.html')
-
-
 class GalleryDetailsView(View):
     def get(self, request, *args, **kwargs):
             return render(request, 'hagakure/gallery_details.html')
