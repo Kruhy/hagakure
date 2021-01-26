@@ -23,7 +23,7 @@ from .views import AddArticleView, AllArticlesView, ArticleView, ArticlesListVie
 urlpatterns = [
     path('', AllArticlesView.as_view(), name='articles'),
     path('<int:pk>/<slug:slug>', ArticleView.as_view(), name='article'),
-    path('add/', AddArticleView.as_view(), name='add_article'),
-    path('edit/<int:pk>/', EditArticleView.as_view(), name='edit_article'),
-    path('list/', ArticlesListView.as_view(), name='article_list'),
+    path('add/', login_required(AddArticleView.as_view()), name='add_article'),
+    path('edit/<int:pk>/', login_required(EditArticleView.as_view()), name='edit_article'),
+    path('list/', login_required(ArticlesListView.as_view()), name='article_list'),
 ]
