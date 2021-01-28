@@ -23,7 +23,7 @@
                                 <h6>
                                     {% for discipline in trainer.disciplines.all  %}
                                         {{ discipline }}
-                                        {%if not forloop.last%}, {%endif%}
+                                        {% if not forloop.last %}, {% endif %}
                                     {% endfor %}
                                 </h6>
                                 <p>
