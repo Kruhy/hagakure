@@ -84,13 +84,3 @@ class AboutView(View):
     def get(self, request, *args, **kwargs):
         context = {'name': display_name(request.user), }
         return render(request, 'hagakure/about_us.html', context)
-
-
-class GalleriesView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/galleires_list.html')
-
-
-class GalleryDetailsView(View):
-    def get(self, request, *args, **kwargs):
-            return render(request, 'hagakure/gallery_details.html')

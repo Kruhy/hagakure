@@ -11,8 +11,14 @@ class AllArticlesView(View):
 
     def get(self, request, *args, **kwargs):
 
-        articles = Article.objects.all().order_by('created_on')
         categories = ArticleCategory.objects.all().order_by('name')
+
+        if request.user.is_staff:
+            articles = Article.objects.all().order_by('-created_on')
+        elif request.user.is_authenticated:
+            articles = Article.objects.filter(is_published=True).all().order_by('-created_on')
+        else:
+            articles = Article.objects.filter(is_published=True, is_public=True).all().order_by('-created_on')
 
         context = {
             'name': display_name(request.user),
@@ -46,6 +52,9 @@ class ArticleView(View):
 class ArticlesListView(View):
 
     def get(self, request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            raise Http404()
 
         articles = Article.objects.all()
         context = {
@@ -81,6 +90,10 @@ class ArticlesListView(View):
 class AddArticleView(View):
 
     def get(self, request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            raise Http404()
+
         categories = ArticleCategory.objects.all()
         context = {
             'name': display_name(request.user),
@@ -95,6 +108,9 @@ class AddArticleView(View):
 class EditArticleView(View):
 
     def get(self, request, *args, **kwargs):
+        if not request.user.is_staff():
+            raise Http404()
+        
         article_pk = kwargs['pk']
         categories = ArticleCategory.objects.all()
         article = Article.objects.filter(pk=article_pk).get()

@@ -1,4 +1,5 @@
 from datetime import date
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
 
@@ -8,6 +9,10 @@ from .models import Discipline, Training, TrainerBio
 
 class MyTrainingsView(View):
     def get(self, request, *args, **kwargs):
+
+        if not request.user.is_authenticated:
+            raise Http404()
+
         trainigns_trainee = Training.objects.filter(trainees=request.user.pk).order_by('start_date')
         trainigns_trainer = Training.objects.filter(trainer=request.user.pk).order_by('start_date')
 

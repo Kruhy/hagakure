@@ -2,56 +2,101 @@
 {% load static %}
 {% block body %}
 
-    <div class="row justify-content-center border-bottom border-dark">
-        <h2 style="margin:30px">
-            Galeria
-        </h2>
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Wszystkie galerie</h1>
     </div>
 
-    <div class="container-fluid">
-        <div class="row justify-content-center" style="margin:30px">
-            <div class="col-sm-10">
-                <div class="card-columns">
+    <div class="container-fluid" style="margin-top:30px">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <table class="table table-hover">
+                <thead class="text-center">
+                    <tr>
+                        <th class="col-sm-2">Tytuł</th>
+                        <th class="col-sm-5">Opis</th>
+                        <th class="col-sm-1">Liczba zdjęć</th>
+                        <th class="col-sm-1">Autor</th>
+                        <th class="col-sm-1">Status</th>
+                        <th class="col-sm-1">Opcje</th>
+                    </tr>
+                </thead>
+                
+                <tbody class="text-left">
                     {% for gallery in galleries %}
-                        <a href="{{ gallery.get_absolute_url }}" class="text-body">
-                            <div class="card" style="width:400px;height:300px">
-                                {% if user.is_staff %}
-                                    
-                                    {% if not gallery.is_published %}
-                                        <div class="card-img-overlay bg-danger text-white">
-                                        <p class="text-center p-0 m-0">
-                                            <small>Galeria nie widoczna na stronie</small>
-                                        </p>
-                                    {% elif not gallery.is_public %}
-                                        <div class="card-img-overlay bg-secondary">
-                                        <p class="text-center p-0 m-0">
-                                            <small>Galeria widoczna tylko dla zalogowanych urzytkowników</small>
-                                        </p>
-                                    {% endif %}
-                                    
-                                {% endif %}
-                                <div class="card-body">                                            
-                                    {% for key, value in images.items %}                                                
-                                        {% if key == gallery %}
-                                            <img class="img-thumbnail card-img-bottom" src="{{ value.image.url }}" alt="Okładka">
-                                        {% endif %}
-                                    {% endfor %}
-                                    <h4 class="card-title text-center pt-3">
-                                        {{ gallery.title }}
-                                    </h4>                                        
-                                </div>
+                        <tr>
+                            <td class="align-middle">
+                                <a class="text-body" href="{{ gallery.get_absolute_url }}" target="_blank">
+                                    {{ gallery.title }}
+                                </a>
                                 
-                                {% if user.is_staff %}
-                                    {% if not gallery.is_published or not gallery.is_public %}
-                                        </div>
-                                    {% endif %}
-                                {% endif %}
-                            </div>
-                        </a>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-    </div>
+                            </td>
 
+                            <td class="align-middle">
+                                <a class="text-body" href="{{ gallery.get_absolute_url }}" target="_blank">
+                                    {{ gallery.description|safe|truncatewords:30 }}
+                                </a>
+                            </td>
+                            <td class="align-middle text-center">
+                                {% for key, value in image_count.items %}
+                                    {% if key == gallery %}
+                                        {{ value }}
+                                    {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td class="align-middle text-center">{{ gallery.author }}</td>
+
+                            <td class="align-middle text-left">
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ gallery.pk }}"
+                                        id="published"
+                                        {% if gallery.is_published %}
+                                            checked
+                                        {% endif %}
+                                        name="is_published"
+                                    >
+                                    <label class="form-check-label" for="published">
+                                        Opublikowany
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        value="{{ gallery.pk }}" 
+                                        id="public"
+                                        {% if gallery.is_public %}
+                                            checked
+                                        {% endif %}
+                                        name="is_public"
+                                    >
+                                    <label class="form-check-label" for="public">
+                                        Publiczny
+                                    </label>
+                                </div>
+                            </td>
+
+                            <td class="align-middle text-center">
+                                <a class="btn btn-secondary" href="{% url 'gallery_edit' gallery.pk %}">Edytuj </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="6">
+                            <div class="container-fluid text-right">
+                                <button type="submit" class="btn btn-danger">Zapisz zmiany</button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+        <div class="contaier text-center my-3">
+            <a href="{% url 'galleries' %}">
+                <button class="btn border-secondary bg-white btn-light">Gotowe</button>
+            </a>
+        </div>
 {% endblock %}

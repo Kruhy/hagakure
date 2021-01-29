@@ -1,0 +1,119 @@
+{% extends 'hagakure/base.html' %}
+{% load static %}
+{% block body %}
+
+    <div class="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Edytuj galerię</h1>
+    </div>
+	<div class="container-fluid p-3 text-center bg-light border-bottom border-dark">
+		<div class="row justify-content-center">
+            <div class="container">
+                <div class="col-sm">
+                    <form action="" method="POST" enctype="multipart/form-data" class="form">
+                        {% csrf_token %}
+                        <div class="form-group row justify-content-center py-3">
+                            <div class="col-sm-4">
+                                <input id="title" class="form-control" type="text" placeholder="Tytuł" name="title" value="{{ gallery.title }}">
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center py-3">
+                            <div class="col-sm-4">
+                                <textarea id="description" class="form-control" type="text" name="description" placeholder="Opis (max 258 znaków)"
+                                >{{ gallery.description }}</textarea>
+                            </div>
+                        </div>
+                        <div class="container-fluid justify-content-center py-3">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                    {% for image in images %}
+                                        <td>
+                                            <div class="card" style="width:400px;">
+                                                <div class="card-body">  
+                                                    <img src="{{ image.image.url }}" class="rounded img-thumbnail">
+                                                </div>
+                                                <div class="card-title">
+                                                    <div class="container-fluid row justify-content-center">
+                                                        <div class="col-sm-6">
+                                                        <label for="order">Kolejność w galerii:</label>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                        <input id="order" class="form-control" type="number" name="order-{{ image.pk }}" min="0" value="{{ image.order }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="card-title bg-danger text-white">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="{{ image.pk }}" id="delete" name="delete">
+                                                        <label for="delete">Usuń z galerii</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    {% endfor %}
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div class="container-fuid py-3 justify-content-center">
+                            <div class="form-group row justify-content-center text-center">
+                                <div class="col-sm-4">
+                                    <label for="file_field">Dodaj więcej zdjęć:</label>
+                                    <input id="file_field" class="form-control-file" type="file" name="file_field" multiple>
+                                </div>
+                            </div>
+                        <div class="row justify-content-center py-3">
+                            <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="published"
+                                        {% if gallery.is_published %}
+                                            checked
+                                        {% endif %}
+                                        name="is_published"
+                                    >
+                                    <label class="form-check-label" for="published">
+                                        Opublikowany
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input
+                                        class="form-check-input"
+                                        type="checkbox"
+                                        id="public"
+                                        {% if gallery.is_public %}
+                                            checked
+                                        {% endif %}
+                                        name="is_public"
+                                    >
+                                    <label class="form-check-label" for="public">
+                                        Publiczny
+                                    </label>
+                                </div>
+                        </div>
+                        
+                        <div class="form-group row justify-content-center py-3">
+                            <div class="col-sm-2">
+                                <input type="submit" class="form-control" value="Zapisz zmiany">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="contaier my-3">
+                <a href="{{ gallery.get_absolute_url }}" target="_blank">
+                    <button class="btn border-secondary bg-white btn-light">Podgląd</button>
+                </a>
+            </div>
+            <div class="contaier my-3">
+                <a href="{% url 'galleries_list' %}">
+                    <button class="btn border-secondary bg-white btn-light">Gotowe</button>
+                </a>
+            </div>
+		</div>
+	</div>
+
+{% endblock %}
