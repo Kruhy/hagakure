@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -18,6 +18,10 @@ from .forms import SignUpForm
 class RegisterUser(View):
 
     def get(self, request, *args, **kwargs):
+
+        if not request.user.is_staff:
+            raise Http404
+
         return render(request, 'registration/register_user.html')
 
     def post(self, request, *args, **kwargs):
@@ -27,13 +31,14 @@ class RegisterUser(View):
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
-            mail_subject = 'Jednorazowy link do rejestracji na stronie hagakure.pl'
-            message = render_to_string('registration/confiramtion_email.html', {
+            context = {
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': default_token_generator.make_token(user),
-            })
+            }
+            mail_subject = 'Jednorazowy link do rejestracji na stronie hagakure.pl'
+            message = render_to_string('registration/confiramtion_email.html', context)
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
                 mail_subject, message, to=[to_email]
@@ -43,8 +48,6 @@ class RegisterUser(View):
                 render,
                 'Wiadomość email wysłana na adres {}. Użytkownik będzie mógł dokończyć rejestrację po kliknięciu w wysłany link'.format(user.email)
                 )
-
-            return HttpResponse('Please confirm your email address to complete the registration')
         else:
             form = SignUpForm()
         return render(request, 'registration/register_user.html')
@@ -68,6 +71,8 @@ class ActivateUser(View):
                 'Miło, że z nami jesteś! Uzupełnij profil, aby dokończyć rejestrację!'
                 )
             #TODO: redirect to user profile edit, add msg
-            return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+            return render(request, 'registration/registration_form.html')
         else:
             return HttpResponse('Activation link is invalid!')
+        
+    #TODO: write POST with updatin user password and data

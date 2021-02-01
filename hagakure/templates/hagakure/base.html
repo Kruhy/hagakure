@@ -75,7 +75,7 @@
                                         {% if user.is_superuser %}
                                             <div class="dropdown-divider"> </div>
                                             <a class="dropdown-item" href="/admin/">Zarządzaj stroną</a>
-                                            <a class="dropdown-item" href="#">Dodaj Użytkownika</a>
+                                            <a class="dropdown-item" href="{% url 'new_user' %}">Dodaj Użytkownika</a>
                                         {% endif %}
 
                                         {% if user.is_staff %}

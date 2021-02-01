@@ -2,6 +2,7 @@ from datetime import date
 from django.contrib import messages
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.contrib.auth.hashers import check_password
+from django.http import Http404
 from django.shortcuts import render, redirect
 from django.views import View
 
