@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'articles',
     'auth_ex',
+    'gallery',
     'hagakure',
     'news',
     'registration',

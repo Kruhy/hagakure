@@ -13,18 +13,18 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.urls import path
-from .views import ChangeEmailView, ChangePasswordView, LogInView, LogOutView, UserDetailsEdit, UserDetailsView, VerifyPasswordView
+
+
+from .views import AddGalleryView, EditGalleryView, GalleriesView, GalleriesListView, GalleryView
 
 
 urlpatterns = [
-    path('change_email/', login_required(ChangeEmailView.as_view()), name='change_email'),
-    path('change_password/', login_required(ChangePasswordView.as_view()), name='change_password'),
-    path('details/', login_required(UserDetailsView.as_view()), name='user_details'),
-    path('edit/', login_required(UserDetailsEdit.as_view()), name='user_edit'),
-    path('login/', LogInView.as_view(), name='login'),
-    path('logout/', LogOutView.as_view(), name='logout'),
-    path('verify_password/', login_required(VerifyPasswordView.as_view()), name='verify_password'),
+    path('', GalleriesView.as_view(), name='galleries'),
+    path('<int:pk>/<slug:slug>', GalleryView.as_view(), name='gallery'),
+    path('list/', login_required(GalleriesListView.as_view()), name='galleries_list'),
+    path('add/', login_required(AddGalleryView.as_view()), name='gallery_add'),
+    path('edit/<int:pk>', login_required(EditGalleryView.as_view()), name='gallery_edit')
 ]

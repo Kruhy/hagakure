@@ -17,19 +17,18 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from hagakure.views import AboutView, GalleriesView, GalleryDetailsView, LandingPageView
+from hagakure.views import AboutView, LandingPageView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('articles/', include('articles.urls')),
+    path('galleries/', include('gallery.urls')),
     path('news/', include('news.urls')),
     path('register/', include('registration.urls')),
     path('training/', include('trainings.urls')),
     path('user/', include('auth_ex.urls')),
     path('', LandingPageView.as_view(), name='landing_page'),
     path('about/', AboutView.as_view(), name='about_us'),
-    path('galleries/', GalleriesView.as_view(), name='galleries'),
-    path('gellery/', GalleryDetailsView.as_view(), name='gallery_details'),
     #TODO: change below in the production as per https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

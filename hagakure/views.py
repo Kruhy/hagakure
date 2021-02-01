@@ -1,5 +1,6 @@
 from datetime import date, timedelta
 from django.contrib.auth import get_user_model
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import View
 
@@ -60,9 +61,14 @@ class LandingPageView(View):
             articles = Article.objects.filter(is_published=True, is_public=True).order_by('-created_on')[:5]
 
         if request.user.is_authenticated:
-            news = News.objects.filter(is_published=True, expiration_date__lte=date.today()).order_by('-created_on')[:5]
+            news = News.objects.filter(is_published=True).filter(
+                Q(expiration_date__gte=date.today()) | Q(expiration_date=None)
+                ).order_by('-created_on')[:5]
         else:
-            news = News.objects.filter(is_published=True, is_public=True, expiration_date__lte=date.today()).order_by('-created_on')[:5]
+            news = News.objects.filter(is_published=True,
+                is_public=True).filter(
+                Q(expiration_date__gte=date.today()) | Q(expiration_date=None)
+                ).order_by('-created_on')[:5]
 
         context = {
             'name': display_name(request.user),
@@ -84,13 +90,3 @@ class AboutView(View):
     def get(self, request, *args, **kwargs):
         context = {'name': display_name(request.user), }
         return render(request, 'hagakure/about_us.html', context)
-
-
-class GalleriesView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'hagakure/galleires_list.html')
-
-
-class GalleryDetailsView(View):
-    def get(self, request, *args, **kwargs):
-            return render(request, 'hagakure/gallery_details.html')

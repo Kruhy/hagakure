@@ -10,7 +10,14 @@ from .models import News
 class AllNewsView(View):
 
     def get(self, request, *args, **kwargs):
-        news = News.objects.all().order_by('-created_on')
+
+        if request.user.is_staff:
+            news = News.objects.all().order_by('-created_on')
+        elif request.user.is_authenticated:
+            news = News.objects.filter(is_published=True).all().order_by('-created_on')
+        else:
+            news = News.objects.filter(is_published=True, is_public=True).all().order_by('-created_on')
+        
         creation_years = News.objects.dates('created_on','year', 'DESC')
         creation_months = News.objects.dates('created_on','month', 'DESC')
         
@@ -26,6 +33,10 @@ class AllNewsView(View):
 class NewsListView(View):
 
     def get(self, request, *args, **kwargs):
+        
+        if not request.user.is_staff:
+            raise Http404()
+
         news = News.objects.all().order_by('-created_on')
         context = {
             'name': display_name(request.user),
