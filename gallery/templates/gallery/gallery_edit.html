@@ -38,7 +38,7 @@
                                                         <label for="order">Kolejność w galerii:</label>
                                                         </div>
                                                         <div class="col-sm-4">
-                                                        <input id="order" class="form-control" type="number" name="order-{{ image.pk }}" min="0" value="{{ image.order }}">
+                                                        <input id="order" class="form-control" type="number" name="order-{{ image.pk }}" min="0" value="{{ forloop.counter }}">
                                                         </div>
                                                     </div>
                                                 </div>

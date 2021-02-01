@@ -23,8 +23,8 @@ urlpatterns = [
     path('change_email/', login_required(ChangeEmailView.as_view()), name='change_email'),
     path('change_password/', login_required(ChangePasswordView.as_view()), name='change_password'),
     path('details/', login_required(UserDetailsView.as_view()), name='user_details'),
+    path('edit/', login_required(UserDetailsEdit.as_view()), name='user_edit'),
     path('login/', LogInView.as_view(), name='login'),
     path('logout/', LogOutView.as_view(), name='logout'),
-    path('edit/', login_required(UserDetailsEdit.as_view()), name='user_edit'),
     path('verify_password/', login_required(VerifyPasswordView.as_view()), name='verify_password'),
 ]
