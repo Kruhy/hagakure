@@ -1,18 +1,21 @@
 from django.contrib import messages
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import EmailMessage
 from django.http import HttpResponse, Http404
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.views import View
 
+from utils.functions import display_name
+
 User = get_user_model()
-from .forms import SignUpForm
+
+from .forms import SignUpForm, UserRegistrationForm
 
 
 class RegisterUser(View):
@@ -22,7 +25,12 @@ class RegisterUser(View):
         if not request.user.is_staff:
             raise Http404
 
-        return render(request, 'registration/register_user.html')
+        context = {
+            'name': display_name(request.user),
+            'password': User.objects.make_random_password(),
+            }
+
+        return render(request, 'registration/register_user.html', context)
 
     def post(self, request, *args, **kwargs):
         form = SignUpForm(request.POST)
@@ -38,19 +46,18 @@ class RegisterUser(View):
                 'token': default_token_generator.make_token(user),
             }
             mail_subject = 'Jednorazowy link do rejestracji na stronie hagakure.pl'
-            message = render_to_string('registration/confiramtion_email.html', context)
+            message = render_to_string('registration/confirmation_email.html', context)
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            messages.success(
-                render,
-                'Wiadomość email wysłana na adres {}. Użytkownik będzie mógł dokończyć rejestrację po kliknięciu w wysłany link'.format(user.email)
-                )
-        else:
-            form = SignUpForm()
-        return render(request, 'registration/register_user.html')
+            # messages.success(
+            #     render,
+            #     'Wiadomość email wysłana na adres {}. Użytkownik będzie mógł dokończyć rejestrację po kliknięciu w wysłany link'.format(user.email)
+            #     )
+        
+        return redirect('add_user')
 
 
 class ActivateUser(View):
@@ -66,13 +73,73 @@ class ActivateUser(View):
         if user is not None and default_token_generator.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.success(
-                render,
-                'Miło, że z nami jesteś! Uzupełnij profil, aby dokończyć rejestrację!'
-                )
-            #TODO: redirect to user profile edit, add msg
-            return render(request, 'registration/registration_form.html')
+            messages.success(request, 'Miło, że z nami jesteś! Uzupełnij profil, aby dokończyć rejestrację!')
+
+            context = {
+                'name': display_name(request.user),
+                'email': user.email,
+                }
+
+            return render(request, 'registration/registration_form.html', context)
+
         else:
             return HttpResponse('Activation link is invalid!')
         
-    #TODO: write POST with updatin user password and data
+    def post(self, request, *args, **kwargs):
+        form = UserRegistrationForm(request.POST)
+
+        if form.is_valid():
+            data = form.cleaned_data
+
+            if form.data['password'] != form.data['password2']:
+                messages.error(
+                    render,
+                    'Podane hasła są rózne! Spróbuj jeszcze raz!'
+                    )
+                context = {
+                    'email': data['email'],
+                    'first_name': data['first_name'],
+                    'last_name': data['last_name'],
+                    'nick': data['nick'],
+                    'phone_number': data['phone_number'],
+                    'ice_contact_name': data['ice_contact_name'],
+                    'ice_contact_number': data['ice_contact_number'],
+                    'birth_date': data['birth_date'],
+                    }
+                return render(request, 'registration/registration_form.html', context)
+
+            user = User.objects.filter(email=form.data['email']).get()
+
+            user.set_password(data['password'])
+            user.first_name = data['first_name']
+            user.last_name = data['last_name']
+
+            if data['nick'] != '':
+                user.nick = data['nick']
+
+            user.phone_number = data['phone_number']
+            user.ice_contact_name = data['ice_contact_name']
+            user.ice_contact_number = data['ice_contact_number']
+
+            if data['birth_date'] != '':
+                user.birth_date = data['birth_date']
+            
+            user.save()
+
+            login(request, user)
+
+            return redirect('user_details')
+
+        messages.error(request, 'Błąd, spróbuj ponownie')
+
+        context = {
+            'email': form.data['email'],
+            'first_name': form.data['first_name'],
+            'last_name': form.data['last_name'],
+            'nick': form.data['nick'],
+            'phone_number': form.data['phone_number'],
+            'ice_contact_name': form.data['ice_contact_name'],
+            'ice_contact_number': form.data['ice_contact_number'],
+            'birth_date': form.data['birth_date'],
+            }
+        return render(request, 'registration/registration_form.html', context)

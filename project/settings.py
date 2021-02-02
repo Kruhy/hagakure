@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .local_settings import SECRET_KEY as LOCAL_SECRET_KEY, DATABASES as LOCAL_DATABASES
+from .local_settings import SECRET_KEY as LOCAL_SECRET_KEY, DATABASES as LOCAL_DATABASES, EMAIL_HOST_PASSWORD as LOCAL_HOST_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,13 +136,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Email Server Setup
-# TODO: EMAIL_HOST, EMAIL_HOST, EMSIL_HOST_USER filef in when available - in local_settings.py!
+# TODO: EMAIL_HOST, EMAIL_HOST_PASSWORD, EMSIL_HOST_USER update when available and change the backend
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  
-MAILER_EMAIL_BACKEND = EMAIL_BACKEND  
-EMAIL_HOST = 'your_mail_server'  
-EMAIL_HOST_PASSWORD = 'your_password'  
-EMAIL_HOST_USER = 'your_email'  
-EMAIL_PORT = 465  
-EMAIL_USE_SSL = True  
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+MAILER_EMAIL_BACKEND = EMAIL_BACKEND
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_PASSWORD = LOCAL_HOST_PASSWORD
+EMAIL_HOST_USER = 'piotrszczygielski@gmail.com'
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

@@ -18,6 +18,6 @@ from django.urls import path
 from .views import ActivateUser, RegisterUser
 
 urlpatterns = [
-    path('activate<uidb64>/<token>/', ActivateUser.as_view(), name='activate_user'),
-    path('new_user/', RegisterUser.as_view(), name='new_user'),
+    path('activate<uidb64>/<token>/', ActivateUser.as_view(), name='activate'),
+    path('add_user/', RegisterUser.as_view(), name='add_user'),
 ]

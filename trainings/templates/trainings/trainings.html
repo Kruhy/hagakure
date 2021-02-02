@@ -53,7 +53,7 @@
                         <tbody>
                             <tr>
                                 <td class="align-middle">
-                                    <a href="{% url 'about_us' %}#dojo" class="text-body">
+                                    <a href="{% url 'about_us' %}#dojo">
                                         {{ training.dojo }}
                                     </a>
                                 </td>
@@ -84,7 +84,7 @@
                                     <span class="font-weight-bold">
                                         Trener:
                                     </span>
-                                    <a href="#" class="text-body">
+                                    <a href="{% url 'trainers' %}#{{ training.trainer.pk }}">
                                         {{ training.trainer }}
                                     </a>
                                 </td>

@@ -64,7 +64,7 @@
 									{% if user.is_superuser %}
 										<div class="dropdown-divider"> </div>
 										<a class="dropdown-item" href="admin/">Zarządzaj stroną</a>
-										<a class="dropdown-item" href="{% url 'new_user' %}">Dodaj Użytkownika</a>
+										<a class="dropdown-item" href="{% url 'add_user' %}">Dodaj Użytkownika</a>
 									{% endif %}
 
 									{% if user.is_staff %}
@@ -80,7 +80,7 @@
                                         {% endif %}
 
 									<div class="dropdown-divider"> </div>
-									<a class="dropdown-item" href="{% url 'logout' %}?next={{request.path}}">Wyloguj</a>                                            
+									<a class="dropdown-item" href="{% url 'logout' %}">Wyloguj</a>                                            
 								</div>
 
 							</div>
@@ -98,9 +98,9 @@
 		<div class="container-fluid" style="margin-top:30px">
 			<div class="row justify-content-center">
 				<div class="col-sm-3 order-last">
-				
-					<h5 class="text-center">Najnowsze artykuły</h5>
-					
+					<a class="text-body" href="{% url 'articles' %}">
+						<h5 class="text-center">Najnowsze artykuły</h5>
+					</a>
 					{% for article in articles %}
 						<div class="container-fluid" style="margin-top:20px">
 							<a href="{{ article.get_absolute_url }}" class="text-body">
@@ -118,7 +118,9 @@
 					{% endif %}
 				</div>
 				<div class="col-sm-7 border-left border-right border-dark">
-					<h3 class="text-center">Aktualności</h3>
+					<a class="text-body" href="{% url 'all_news' %}">
+						<h3 class="text-center">Aktualności</h3>
+					</a>
 					<div class="container-fluid" style="margin-top:20px">
 						{% for news in all_news %}
 						<div class="container-fluid" style="margin-top:20px">
@@ -140,7 +142,9 @@
 				</div>
 
 				<div class="col-sm-2 order-first">
-					<h5 align="center">Treningi w tym tygodniu</h5>
+					<a class="text-body" href="{% url 'trainings_list' %}">
+						<h5 align="center">Treningi w tym tygodniu</h5>
+					</a>
 					<div class="container-fluid">
 						<table class="table table-sm">
 

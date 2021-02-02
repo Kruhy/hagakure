@@ -24,13 +24,14 @@
         <div class="row justify-content-center">
             <div class="col-sm-4 align-self-center">
                 <form action="" class="form" method="POST">
+                {% csrf_token %}
                     <table class="table table-borderless">
                         <tr>
                             <th class="align-middle text-right">
                                 <label for="email" class="font-weight-bold">Adres e-mail:</label>
                             </th>
                             <td>
-                                <input type="email" name="email" class="form-control" placeholder="e-mail" id="email">
+                                <input type="email" name="email" class="form-control" placeholder="e-mail" id="email" required>
                             </td>
                         </tr>
                         <tr>
@@ -40,9 +41,12 @@
                             <td>
                                 <input type="checkbox" name="is_staff" class="form-checkbox">
                             </td>
-                        </tr>
+                        </tr>                               
+
                     </table>
                     <div class="form-group text-center">
+                        <input type="password" name="password1" class="form-control" value="{{ password }}" hidden readonly>
+                        <input type="password" name="password2" class="form-control" value="{{ password }}" hidden readonly>
                         <input type="submit" class="btn btn-secondary" value="Dodaj!">
                     </div>
                 </form>

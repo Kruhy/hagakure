@@ -23,12 +23,18 @@
                     <table class="table table-bordered">
                         <tbody>
                             <tr>
+                                <th class="col-sm-3 align-middle table-secondary">Email:</th>
+                                <td class="col-sm-9 align-middle">
+                                    <input type="text" class="form-control" name="email" value="{{ email }}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th class="align-middle">
-                                    <label for="new_password1">Hasło:</label>
+                                    <label for="password">Hasło:</label>
                                 </th>
                                 <td>
                                     <div class="input-group">
-                                        <input type="password" class="form-control pwd" placeholder="Nowe hasło" id="new_password" name="new_password1">
+                                        <input type="password" class="form-control pwd" placeholder="Hasło" id="password" name="password" required>
                                         <span class="input-group-btn">
                                             <button class="btn btn-default btn-outline-secondary reveal" type="button">
                                                 <i class="fa fa-eye" id="eye"></i>
@@ -39,11 +45,11 @@
                             </tr>
                             <tr>
                                 <th class="align-middle">
-                                    <label for="new_password2">Powtórz hasło:</label>
+                                    <label for="password2">Powtórz hasło:</label>
                                 </th>
                                 <td>
                                     <div class="input-group">
-                                        <input type="password" class="form-control pwd" placeholder="Powtórz hasło" id="new_password2" name="new_password2">
+                                        <input type="password" class="form-control pwd" placeholder="Powtórz hasło" id="password2" name="password2" required>
                                         <span class="input-group-btn">
                                             <button class="btn btn-default btn-outline-secondary reveal" type="button">
                                                 <i class="fa fa-eye" id="eye"></i>
@@ -55,37 +61,37 @@
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Imię:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="first_name" value="{{ first_name }}">
+                                    <input type="text" class="form-control" name="first_name" value="{{ first_name }}" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Nazwisko:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="last_name" value="{{ last_name }}">
+                                    <input type="text" class="form-control" name="last_name" value="{{ last_name }}" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Nick:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="nick" value=" {{ nick }}">
+                                    <input type="text" class="form-control" name="nick" value="{{ nick }}">
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Nr telefonu:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="phone_number" value="{{ phone }}">
+                                    <input type="text" class="form-control" name="phone_number" value="{{ phone_number }}" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Kontakt ICE:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="ice_contact_name" value="{{ ice }}">
+                                    <input type="text" class="form-control" name="ice_contact_name" value="{{ ice_contact_name }}" required>
                                 </td>
                             </tr>
                             <tr>
                                 <th class="col-sm-3 align-middle table-secondary">Telefon ICE:</th>
                                 <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="ice_contact_number" value=" {{ ice_phone }}">
+                                    <input type="text" class="form-control" name="ice_contact_number" value="{{ ice_contact_number}}" required>
                                 </td>
                             </tr>
                             <tr>
@@ -95,13 +101,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="2" class="align-middle text-middle">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox"> Zapoznałem/am się i zgadzam się z 
+                                        <input class="form-check-input" type="checkbox" requred> Zapoznałem/am się i zgadzam się z 
                                         <a href = "#" target="_blank">Regulaminem</a>
                                     </label>
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox"> Zapoznałem/am się i zgadzam się z 
+                                        <input class="form-check-input" type="checkbox" required> Zapoznałem/am się i zgadzam się z 
                                         <a href = "#" target="_blank">Polityką RODO</a>
                                     </label>    
                                 </td> 

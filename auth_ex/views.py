@@ -49,14 +49,9 @@ class LogInView(View):
 class LogOutView(View):
 
     def get(self, request, *args, **kwargs):
-        next = request.GET.get('next', '/')
         logout(request)
 
-        # redirect to landing page if 'next' page would result in error due to eg login_required
-        if redirect(next).status_code > 400:
-            return redirect('landing_page')
-
-        return redirect(next)
+        return redirect('landing_page')
 
 
 
