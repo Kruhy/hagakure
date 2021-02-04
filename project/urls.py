@@ -23,6 +23,7 @@ from hagakure.views import AboutView, LandingPageView
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
     path('articles/', include('articles.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('galleries/', include('gallery.urls')),
     path('news/', include('news.urls')),
     path('register/', include('registration.urls')),

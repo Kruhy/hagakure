@@ -3,7 +3,7 @@ from django.shortcuts import redirect, render
 from django.views import View
 
 from utils.functions import display_name
-from .forms import ArticlePublicationStatusForm
+from .forms import AddArticleForm, ArticlePublicationStatusForm
 from .models import Article, ArticleCategory
 
 
@@ -93,16 +93,35 @@ class AddArticleView(View):
 
         if not request.user.is_staff:
             raise Http404()
-
+        form = AddArticleForm()
         categories = ArticleCategory.objects.all()
         context = {
             'name': display_name(request.user),
             'categories': categories,
+            'form': form,
         }
         return render(request, 'articles/add_article.html', context)
 
     def post(self, request, *args, **kwargs):
-        pass
+        
+        form = AddArticleForm(request.POST)
+        article = Article()
+        # TODO: deal with form.is_valid() false due to category!
+        import pdb; pdb.set_trace()
+        if form.is_valid():
+            data = form.cleaned_data
+
+            article.title = data['title']
+            article.category = data['category']
+            article.body = data['body']
+            if form.data['is_published']:
+                article.is_published = True
+            if form.data['is_public']:
+                article.is_public = True
+            article.author = request.user
+            article.save()
+        
+        return redirect('article_list')
 
 
 class EditArticleView(View):
