@@ -22,7 +22,7 @@
                                     <label for="category">Kategorie:</label>
                                     <select id="category" class="form-control text-center" name="category" multiple required>
                                         {% for category in categories %}
-                                        <option value="{{ category }}">{{ category.name }}</option>
+                                        <option value="{{ category.pk }}">{{ category.name }}</option>
                                         {% endfor %}
                                     <select>
                                 </div>
@@ -64,14 +64,4 @@
             </div>
 		</div>
 	</div>
-
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
-
 {% endblock %}
-</body>

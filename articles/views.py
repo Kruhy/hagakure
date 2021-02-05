@@ -106,20 +106,17 @@ class AddArticleView(View):
         
         form = AddArticleForm(request.POST)
         article = Article()
-        # TODO: deal with form.is_valid() false due to category!
-        import pdb; pdb.set_trace()
+        
         if form.is_valid():
             data = form.cleaned_data
 
             article.title = data['title']
-            article.category = data['category']
             article.body = data['body']
-            if form.data['is_published']:
-                article.is_published = True
-            if form.data['is_public']:
-                article.is_public = True
+            article.is_published = data['is_published']
+            article.is_public = data['is_public']
             article.author = request.user
             article.save()
+            article.category.set(data['category'])
         
         return redirect('article_list')
 
@@ -127,19 +124,38 @@ class AddArticleView(View):
 class EditArticleView(View):
 
     def get(self, request, *args, **kwargs):
-        if not request.user.is_staff():
+        if not request.user.is_staff:
             raise Http404()
         
         article_pk = kwargs['pk']
         categories = ArticleCategory.objects.all()
         article = Article.objects.filter(pk=article_pk).get()
 
+        form = AddArticleForm(initial={'body': article.body, })
+
         context = {
             'name': display_name(request.user),
             'categories': categories,
             'article': article,
+            'form': form,
         }
         return render(request, 'articles/edit_article.html', context)
 
     def post(self, request, *args, **kwargs):
-        pass
+    
+        form = AddArticleForm(request.POST)
+        article_pk = kwargs['pk']
+        article = Article.objects.filter(pk=article_pk).get()
+
+        if form.is_valid():
+            data = form.cleaned_data
+
+            article.title = data['title']
+            article.body = data['body']
+            article.is_published = data['is_published']
+            article.is_public = data['is_public']
+            article.author = request.user
+            article.save()
+            article.category.set(data['category'])
+        
+        return redirect('article_list')

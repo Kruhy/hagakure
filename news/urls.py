@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 
-from .views import AllNewsView, NewsListView
+from .views import AddNewsView, AllNewsView, EditNewsView, NewsListView
 
 
 urlpatterns = [
     path('', AllNewsView.as_view(), name='all_news'),
+    path('add/', AddNewsView.as_view(), name='add_news'),
+    path('edit/<int:pk>', EditNewsView.as_view(), name='edit_news'),
     path('list/', NewsListView.as_view(), name='news_list'),
 ]

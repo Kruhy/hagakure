@@ -3,12 +3,14 @@ from django.contrib.auth import get_user_model
 from django.template.defaultfilters import slugify
 from django.urls import reverse
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 User = get_user_model()
 
 
 class News(models.Model):
     title = models.CharField(max_length=128)
-    body = models.TextField()
+    body = RichTextUploadingField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     is_published = models.BooleanField(default=False)

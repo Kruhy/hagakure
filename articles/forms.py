@@ -11,4 +11,4 @@ class ArticlePublicationStatusForm(forms.Form):
 class AddArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('title','body', 'category',)
+        fields = ('title','body', 'category', 'is_published', 'is_public',)

@@ -9,25 +9,20 @@
             <div class="container">
                 <div class="col-sm">
                     <form action="" method="POST">
+                    {% csrf_token %}
+                    {{ form.media }}
                         <div class="form-group row justify-content-center py-3">
                             <div class="col-sm-4">
-                                <label for="title">Tytuł:</label>
-                                <input id="title" class="form-control" type="text" placeholder="Tytuł" name="title" value="{{ article.title }}">
+                                <input id="title" class="form-control" type="text" placeholder="Tytuł" name="title">
                             </div>
                         </div>
                         <div class="container-fuid py-3 justify-content-center">
                             <div class="form-group row justify-content-center">
                                 <div class="col-sm-2">
                                     <label for="category">Kategorie:</label>
-                                    <select id="category" class="form-control text-center" name="category" multiple>
+                                    <select id="category" class="form-control text-center" name="category" multiple required>
                                         {% for category in categories %}
-                                            <option value="{{ category.name }}"
-                                                {% if category in article.category.all %}
-                                                    selected
-                                                {% endif %}
-                                                >
-                                                {{ category.name }}
-                                            </option>
+                                        <option value="{{ category.pk }}">{{ category.name }}</option>
                                         {% endfor %}
                                     <select>
                                 </div>
@@ -42,15 +37,26 @@
                         </div>
                         <div class="form-group row justify-content-center">
                             <div class="col-sm">
-                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor">
-                                    {{ article.body }}
-                                </textarea>
+                                {{ form.body|safe }}
                             </div>
                         </div>
-                        <div class="form-group row justify-content-center btn-group">
-                            <div class="col-sm">
-                                <input type="submit" class="form-control btn btn-secondary btn-block" value="Zapisz">
-                                <a class="btn btn-danger btn-block" href="{%url 'article_list' %}">Anuluj</a>
+                        <div class="form-group row justify-content-center">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="published" name="is_published">
+                                <label class="form-check-label" for="published">
+                                    Opublikowany
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="public" name="is_public">
+                                <label class="form-check-label" for="public">
+                                    Publiczny
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row justify-content-center">
+                            <div class="col-sm-2">
+                                <input type="submit" class="form-control" value="Dodaj">
                             </div>
                         </div>
                     </form>
@@ -58,13 +64,6 @@
             </div>
 		</div>
 	</div>
-	<script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-    </script>
 
 {% endblock %}
 </body>
