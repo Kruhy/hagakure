@@ -81,3 +81,10 @@ div:target{
 #topBtn:hover {
   background-color: #555;
 }
+
+.pagination > .active > a
+{
+    color: white !Important;
+    background-color: #6c757d !Important;
+    border: solid 1px #6c757d !Important;
+}

@@ -122,56 +122,28 @@
                                             <th class="col-sm-8">Treść</th>
                                         <tr>
                                     </thead>
+                                    
                                     <tbody>
-                                        <tr class="table-secondary">
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr class="table-secondary">
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
+                                        {% for message in messages %}
+                                            {% if message.training == training %}
+                                                {% if message.author == training.trainer %}
+                                                <tr class="table-secondary">
+                                                {% else %}
+                                                <tr class="table">
+                                                {% endif %}
+                                                    <th class="col-sm-2 align-middle">
+                                                        {{ message.author }}
+                                                        {% if message.author == training.trainer %}
+                                                        <br>(Trener)
+                                                        {% endif %}
+                                                    </th>
+                                                    <td class="col-sm-2 align-middle">{{ message.created_on|date:"d-m-Y H:i" }}</td>
+                                                    <td class="col-sm-8 text-left align-middle">
+                                                        {{ message.body }}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -180,12 +152,17 @@
                                     <h4>Dodaj wiadomość:</h4>
                                 </div>
                                 <div class="container">
-                                    <form action="/" class="form" method="POST">
+                                    <form action="" class="form" method="POST">
+                                        {% csrf_token %}
                                         <div class="form-group row">
                                             <div class="col">
-                                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor{{ training.pk }}">
-                                                    Wiadomość
-                                                </textarea>
+                                                <input class="form-control" type="text" maxlenth="256" placeholder="Wpisz wiadomość (max 256 znaków)" name="message" required></input>
+                                                <input class="form-control" type="number" name="training_pk" value={{ training.pk }} hidden></input>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-content-center">
+                                            <div class="col-sm-2">
+                                                <input type="submit" class="form-control" value="Dodaj"></input>
                                             </div>
                                         </div>
                                     </form>
@@ -194,17 +171,6 @@
                         </div>
                     </div>
                 </div>
-            
-                <script>
-                    ClassicEditor
-                        .create( document.querySelector( '#editor{{ training.pk }}' ) )
-                        .then( editor => {
-                            window.editor{{ training.pk }} = editor;
-                        } )
-                        .catch( error => {
-                            console.error( error );
-                        } );
-                </script>
 
             {% endfor %}
         {% endif %}
@@ -290,55 +256,26 @@
                                         <tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="table-secondary">
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 12:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 11:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 10:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 9:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr class="table-secondary">
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 8:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 7:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <th class="col-sm-2 align-middle">GalAn</th>
-                                            <td class="col-sm-2 align-middle">01-01-2020 6:00</td>
-                                            <td class="col-sm-8 text-left">
-                                                {% lorem %}
-                                            </td>
-                                        </tr>
+                                        {% for message in messages %}
+                                            {% if message.training == training %}
+                                                {% if message.author == training.trainer %}
+                                                <tr class="table-secondary">
+                                                {% else %}
+                                                <tr class="table">
+                                                {% endif %}
+                                                    <th class="col-sm-2 align-middle">
+                                                        {{ message.author }}
+                                                        {% if message.author == training.trainer %}
+                                                        <br>(Trener)
+                                                        {% endif %}
+                                                    </th>
+                                                    <td class="col-sm-2 align-middle">{{ message.created_on|date:"d-m-Y H:i"  }}</td>
+                                                    <td class="col-sm-8 text-left align-middle">
+                                                        {{ message.body }}
+                                                    </td>
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
                                     </tbody>
                                 </table>
                             </div>
@@ -347,12 +284,17 @@
                                     <h4>Dodaj wiadomość:</h4>
                                 </div>
                                 <div class="container">
-                                    <form action="/" class="form" method="POST">
+                                    <form action="" class="form" method="POST">
+                                    {% csrf_token %}
                                         <div class="form-group row">
                                             <div class="col">
-                                                <textarea name="content" class="form-control rounded-0" rows="20" id="editor{{ training.pk }}">
-                                                    Wiadomość
-                                                </textarea>
+                                                <input class="form-control" type="text" maxlenth="256" placeholder="Wpisz wiadomość (max 256 znaków)" name="message" required></input>
+                                                <input class="form-control" type="number" name="training_pk" value={{ training.pk }} hidden></input>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row justify-content-center">
+                                            <div class="col-sm-2">
+                                                <input type="submit" class="form-control" value="Dodaj"></input>
                                             </div>
                                         </div>
                                     </form>
@@ -361,17 +303,6 @@
                         </div>
                     </div>
                 </div>
-            
-                <script>
-                    ClassicEditor
-                        .create( document.querySelector( '#editor{{ training.pk }}' ) )
-                        .then( editor => {
-                            window.editor{{ training.pk }} = editor;
-                        } )
-                        .catch( error => {
-                            console.error( error );
-                        } );
-                </script>
 
             {% endfor %}
         {% endif %}

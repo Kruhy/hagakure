@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'gallery',
     'hagakure',
+    'messaging',
     'news',
     'registration',
     'trainings',
@@ -159,8 +160,7 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
-        #'skin': 'office2013',
+        'skin': 'moono-lisa',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -177,7 +177,7 @@ CKEDITOR_CONFIGS = {
                        'Language']},
             {'name': 'links', 'items': ['Link', 'Unlink', 'Anchor']},
             {'name': 'insert',
-             'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
+             'items': ['Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
@@ -193,15 +193,18 @@ CKEDITOR_CONFIGS = {
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
         # 'toolbarGroups': [{ 'name': 'document', 'groups': [ 'mode', 'document', 'doctools' ] }],
-        # 'height': 291,
+        # 'height': 400,
         # 'width': '100%',
         # 'filebrowserWindowHeight': 725,
         # 'filebrowserWindowWidth': 940,
         # 'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'language': 'pl',
         'tabSpaces': 4,
+        'language_list': ['pl:Polski', 'en:English'],
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature
+            'uploadwidget',
             # your extra plugins here
             'div',
             'autolink',
@@ -214,7 +217,9 @@ CKEDITOR_CONFIGS = {
             'clipboard',
             'dialog',
             'dialogui',
-            'elementspath'
+            'elementspath',
+            'language',
+            'wsc'
             ]),
         }
     }

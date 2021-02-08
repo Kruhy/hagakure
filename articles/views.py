@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import redirect, render
 from django.views import View
@@ -11,6 +12,8 @@ class AllArticlesView(View):
 
     def get(self, request, *args, **kwargs):
 
+        selected_category_name = kwargs['category']
+
         categories = ArticleCategory.objects.all().order_by('name')
 
         if request.user.is_staff:
@@ -20,10 +23,20 @@ class AllArticlesView(View):
         else:
             articles = Article.objects.filter(is_published=True, is_public=True).all().order_by('-created_on')
 
+        if selected_category_name != 'all':
+            selected_category = categories.filter(name=selected_category_name).get()
+            articles = articles.filter(category=selected_category)
+        
+        articles_per_page = 5
+        paginator = Paginator(articles, articles_per_page)
+
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
         context = {
             'name': display_name(request.user),
-            'articles': articles,
-            'categories': categories
+            'categories': categories,
+            'page_obj': page_obj,
         }
 
         return render(request, 'articles/articles.html', context)

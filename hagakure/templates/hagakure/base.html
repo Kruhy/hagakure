@@ -45,7 +45,7 @@
                                     <a class="nav-link" href="{% url 'trainings_list' %}">Treningi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'articles' %}">Artykuły</a>
+                                    <a class="nav-link" href="{% url 'articles' "all" %}">Artykuły</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{% url 'galleries' %}">Galeria</a>
@@ -105,12 +105,14 @@
             {% endblock %}
 
             <div id="content-wrap">
-                 <button class="btn btn-secondary" onclick="topFunction()" id="topBtn" title="Góra strony">
+                <button class="btn btn-secondary" onclick="topFunction()" id="topBtn" title="Góra strony">
                     <i class="fa fa-angle-double-up"></i>
-                 </button> 
+                </button> 
+
                 {% block body %}
-                {% endblock %}
                 
+                {% endblock %}
+            
             </div>
 
             {% block footer %}

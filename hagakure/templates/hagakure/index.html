@@ -33,7 +33,7 @@
 							<a class="nav-link" href="{% url 'trainings_list' %}">Treningi</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="{% url 'articles' %}">Artykuły</a>
+							<a class="nav-link" href="{% url 'articles' "all" %}">Artykuły</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="{% url 'galleries' %}">Galeria</a>
@@ -98,7 +98,7 @@
 		<div class="container-fluid" style="margin-top:30px">
 			<div class="row justify-content-center">
 				<div class="col-sm-3 order-last">
-					<a class="text-body" href="{% url 'articles' %}">
+					<a class="text-body" href="{% url 'articles' "all" %}">
 						<h5 class="text-center">Najnowsze artykuły</h5>
 					</a>
 					{% for article in articles %}

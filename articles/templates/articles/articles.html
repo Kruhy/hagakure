@@ -6,11 +6,11 @@
         <h1>Artykuły</h1>
         <ul class="nav justify-content-center" id="btn-container">
             <li class="nav-item">
-                <button class="btn btn-light active" onclick="filterSelection('all')">Wszystkie</button>
+                <a class="btn btn-light" href="{% url 'articles' "all" %}">Wszystkie</a>
             </li>
             {% for category in categories %}
             <li class="nav-item">
-                <button class="btn btn-light" onclick="filterSelection('{{ category.name }}')">{{ category.name }}</button>
+                <a class="btn btn-light" href="{% url 'articles' category.name %}">{{ category.name }}</a>
             </li>
             {% endfor %}
         </ul> 
@@ -19,7 +19,7 @@
     <div class="container-fluid" style="margin-top:30px">
 		<div class="row justify-content-center">
             <div class="col-sm-9 text-center">
-                {% for article in articles %}
+                {% for article in page_obj %}
                     {% if article.is_published or user.is_staff %}
                         {% if article.is_public or user.is_authenticated %}
                             <div class="filterDiv {% for category in article.category.all %}{{ category.name }} {% endfor %}">
@@ -49,7 +49,7 @@
                                         <div class="text-left">
                                             
                                             <p>
-                                                {{ article.body|safe|truncatewords:100  }}
+                                                {{ article.body|striptags|truncatewords:100  }}
                                             </p>
                                             
                                         </div>
@@ -74,5 +74,30 @@
             </div>
         </div>
     </div>
+    {% if page_obj.has_other_pages %}
 
+    <ul class="pagination justify-content-center my-2">
+
+        {% if page_obj.has_previous %}
+            {% if page_obj.previous_page_number != 1 %}
+            <li class="page-item"><a class="page-link text-body" href="?page=1">&laquo;&laquo;</a></li>
+            {% endif %}
+            <li class="page-item"><a class="page-link text-body" href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+        {% endif %}
+
+        {% for page_number in page_obj.paginator.page_range %}
+
+            <li class="page-item text-body {% if forloop.counter == page_obj.number %}active{% endif %}"><a class="page-link text-body" href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+        
+        {% endfor %}   
+
+        {% if page_obj.has_next %}
+            <li class="page-item"><a class="page-link text-body" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+            {% if page_obj.next_page_number != page_obj.paginator.num_pages %}
+            <li class="page-item"><a class="page-link text-body" href="?page={{ page_obj.paginator.num_pages }}">&raquo;&raquo;</a></li>
+            {% endif %}
+        {% endif %}
+    </ul> 
+>
+    {% endif %}
 {% endblock %}
