@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .local_settings import SECRET_KEY as LOCAL_SECRET_KEY, DATABASES as LOCAL_DATABASES, EMAIL_HOST_PASSWORD as LOCAL_HOST_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+SECRET_KEY = 'mt&+q9s5s)jk@0kw#_wb7q0#)n7mfa=fq#i^h!qc5#2ie2!h4j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -84,7 +83,16 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = LOCAL_DATABASES
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'hagakure_db',
+        'USER': 'postgres',
+        'PASSWORD': 'Potu$1982',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 
 # User substitution
@@ -134,6 +142,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
@@ -148,7 +157,7 @@ EMAIL_FILE_PATH = BASE_DIR
 
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = LOCAL_HOST_PASSWORD
+EMAIL_HOST_PASSWORD = 'Potu$1982'
 EMAIL_HOST_USER = 'piotrszczygielski@gmail.com'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
