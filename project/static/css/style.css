@@ -1,0 +1,150 @@
+#banner-container {
+    width: auto;
+    height: 500px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+  }
+  
+#content-wrap {
+  padding-top: 3.6rem;          /* navbar height */
+  padding-bottom: 8.25rem;    /* Footer height */
+  }
+  
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 8.25rem;            /* Footer height */
+  }
+#banner {
+  background: url("../img/dojo_quote.jpg");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-color:#f7f7f7;
+  height: 500px;
+}
+#table-responsive {
+  height:300px;
+  overflow:scroll;
+}
+thead#responsive tr:nth-child(1) th {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+#gallery{
+  width: 400px;
+  height: auto;
+}
+
+div:target{
+  scroll-margin-top: 3.6rem; 
+}
+
+.filterDiv {
+  display: none;
+}
+
+.filterBtn {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.ck-editor__editable_inline {
+  min-height: 400px;
+}
+
+#topBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 10px;
+  width: 50px;
+  height: 50px; 
+  font-size: 25px;
+}
+
+#topBtn:hover {
+  background-color: #555;
+}
+
+#cookie-banner {
+  display: none;
+  position: fixed;
+  bottom: 0px;
+  z-index: 99;
+  width: 100%;
+  opacity: 0.75;
+}
+#cookie-banner:hover {
+  opacity: 1;
+}
+
+.pagination > .active > a
+{
+    color: white !Important;
+    background-color: #6c757d !Important;
+    border: solid 1px #6c757d !Important;
+}
+
+.w-1 {
+  width: 8.333%;
+}
+.w-2 {
+  width: 16.667%;
+}
+.w-3 {
+  width: 25%;
+}
+.w-4 {
+  width: 33.333%;
+}
+.w-5 {
+  width: 41.667%;
+}
+.w-6 {
+  width: 50%;
+}
+.w-7 {
+  width: 58.333%;
+}
+.w-8 {
+  width: 66.667%;
+}
+.w-9 {
+  width: 75%;
+}
+.w-10 {
+  width: 83.333%;
+}
+.w-11 {
+  width: 91.667%;
+}
+.w-12 {
+  width: 100%;
+}
+
+.carousel-inner > .carousel-item > img {
+  margin:auto;
+  max-height: 800px;
+}
+
+.carousel-indicators,
+.carousel-control-next,
+.carousel-control-prev /*, .carousel-indicators */ {
+    filter: invert(75%);
+}

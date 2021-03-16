@@ -1,0 +1,90 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-sm-6">
+            <h2 class="text-center my-5">
+                Ważne dokumenty Stowarzyszenia:
+            </h2>
+            <div class="row justify-content-center">
+                <div class="col-sm-6">
+                    <table>
+                    <tbody>
+                    <tr>
+                    <td class="w-8 align-middle">
+                        Statut Stowarzyszenia:
+                    </td>
+                    <td class="w-4 align-middle text-center">
+                        <a href="{% static 'resources/documents/Statut.pdf' %}" target="_blank">
+                            <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+                        </a>
+                    </td>
+                    </tr>
+                    
+                    <tr>
+                    <td class="align-middle">
+                        Regulamin strony: 
+                        </td>
+                    <td class="align-middle text-center">
+                            <a href="{% static 'resources/documents/Regulamin_strony.pdf' %}" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="align-middle">
+                        Polityka RODO: 
+                        </td>
+                    <td class="align-middle text-center">
+                            <a href="{% static 'resources/documents/Polityka_RODO.pdf' %}" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i> 
+                            </a>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="align-middle">
+                        Regulamin Sekcji Judo:
+                        </td>
+                    <td class="align-middle text-center">
+                            <a href="#" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                        
+                    </td>
+                    </tr>
+                    <tr>
+                    <td class="align-middle">
+                        Zgoda na publikację wizerunku: 
+                        </td>
+                    <td class="align-middle text-center">
+                            <a href="{% static 'resources/documents/Publikacja_wizerunku.pdf' %}" target="_blank">
+                                <i class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                             
+                            <a href="{% static 'resources/documents/Publikacja_wizerunku.docx' %}" target="_blank">
+                                <i class="fa fa-file-word-o fa-2x" aria-hidden="true"></i>
+                            </a>
+                        
+                    </td>
+                    </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <p class="my-4">
+            <small>
+                Aby otworzyć pliki pdf niezbędny jest program Acrobate Reader. Aby zainstalować odwiedź stornę
+                <a href="https://get.adobe.com/pl/reader/otherversions/"> Adobe.</a>
+            </small>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

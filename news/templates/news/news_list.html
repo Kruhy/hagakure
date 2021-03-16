@@ -12,13 +12,13 @@
             <table class="table table-hover">
                 <thead class="text-center">
                     <tr>
-                        <th class="col-sm-1">Tytuł</th>
-                        <th class="col-sm-6">Tekst</th>
-                        <th class="col-sm-1">Data utworzenia</th>
-                        <th class="col-sm-1">Termin na stronie głównej</th>
-                        <th class="col-sm-1">Autor</th>
-                        <th class="col-sm-1">Status</th>
-                        <th class="col-sm-1">Opcje</th>
+                        <th class="w-1">Tytuł</th>
+                        <th class="w-6">Tekst</th>
+                        <th class="w-1">Data utworzenia</th>
+                        <th class="w-1">Termin na stronie głównej</th>
+                        <th class="w-1">Autor</th>
+                        <th class="w-1">Status</th>
+                        <th class="w-1">Opcje</th>
                     </tr>
                 </thead>
 
@@ -27,7 +27,7 @@
                         <tr>
                             <td class="align-middle">{{ news.title }}</td>
                             <td class="align-middle">
-                                {{ news.body|striptags }}
+                                {{ news.body|striptags|safe }}
                             </td>
                             <td class="align-middle text-center">{{ news.created_on|date:"d-m-Y H:i" }}</td>
                             <td class="align-middle text-center">

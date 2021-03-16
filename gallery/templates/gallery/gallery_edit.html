@@ -23,16 +23,16 @@
                             </div>
                         </div>
                         <div class="container-fluid justify-content-center py-3">
-                            <table class="table">
-                                <tbody>
-                                    <tr>
-                                    {% for image in images %}
-                                        <td>
-                                            <div class="card" style="width:400px;">
+                            
+                            <div class="card-columns">
+                                    
+                                {% for image in images %}
+                                        
+                                            <div class="card" style="width:350px; height:350px">
                                                 <div class="card-body">  
-                                                    <img src="{{ image.image.url }}" class="rounded img-thumbnail">
+                                                    <img src="{{ image.image.url }}" class="rounded img-thumbnail" style="max-height:180px; max-width:330px;">
                                                 </div>
-                                                <div class="card-title">
+                                                <div class="card-text my-2">
                                                     <div class="container-fluid row justify-content-center">
                                                         <div class="col-sm-6">
                                                         <label for="order">Kolejność w galerii:</label>
@@ -42,18 +42,19 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="card-title bg-danger text-white">
+                                                <div class="card-footer bg-danger text-white align-bottom">
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="checkbox" value="{{ image.pk }}" id="delete" name="delete">
                                                         <label for="delete">Usuń z galerii</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </td>
-                                    {% endfor %}
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        
+                                    
+                                {% endfor %}
+
+                            </div>
+                            
 
                         </div>
                         <div class="container-fuid py-3 justify-content-center">

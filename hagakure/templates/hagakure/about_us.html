@@ -1,53 +1,70 @@
 {% extends "hagakure/base.html" %}
-
+{% load static %}
 {% block body %}
 
     <div class="container-fluid" style="margin-top:30px">
         <div class="row justify-content-center">
-            <div class="col-sm-3 text-center">
-                <h3>Cele Stowarzyszenia</h3>
-                <p>
-                    Lorem ipsum dolor sit amet. Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
-                    In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
-                    bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
-                </p>
-                <h4>
-                    <a class="text-decoration-none text-dark" href="#">Zobacz statut</a>
-                </h4>
+            <div class="col-sm-3 text-left">
+                <div class="d-flex h-100 flex-column">
+                    <h4 class="text-center">Nasza misja</h4>
+                    <h5 class="my-5">
+                        Dążenie do wspólnego dobra poprzez doskonalenie fizyczne i&nbsp;mentalne zgodnie z&nbsp;tradycyjnymi zasadami Judo.
+                    </h5>
+                </div>
             </div>
-            <div class="col-sm-6 text-center border-right border-left border-dark">
-                <h3>Kim jesteśmy?</h3>
-                <p>
-                    Lorem ipsum dolor sit amet. Consectetur adipiscing elit. In diam elit, aliquet ornare interdum eu, convallis vitae massa.
-                    In eu placerat ex, sit amet iaculis eros. Quisque non tempor sapien. Curabitur tortor felis, placerat et vestibulum id,
-                    bibendum dictum sem. Maecenas ac diam felis. In a erat bibendum, interdum
-                </p>
+            <div class="col-sm-6 text-left border-right border-left border-dark">
+                <div class="d-flex h-100 flex-column">
+                    <h3 class="text-center">Czym jest Hagakure?</h3>
+                    <div class="my-2">
+                        <h6>
+                            <strong>HAGAKURE</strong> - w&nbsp;wolnym tłumaczeniu &quot;<strong>Ukryte w listowiu</strong>&quot;, zaczerpnięte zostało z&nbsp;książki Yamamoto Tsunetomo o&nbsp;tym samym tytule. 
+                            Urzekła nas zarówno prostota jak i głębia tej formy.
+                        </h6>
+                        <h6>
+                            <strong>Stowarzyszenie Hagakure</strong> powstało z potrzeby. Mimo prawie nieograniczonych możliwości spędzania aktywnie wolnego czasu
+                            w&nbsp;Warszawie, odnalezienie miejsca, gdzie osoba dorosła, bez jakiegokolwiek wcześniejszego przygotowania może zacząć trenować judo
+                            jest bardzo trudne. Dlatego postanowiliśmy zorganizować się i stworzyć miejsce dla ludzi takich jak my, już nie kwalifikujących się do grup dziecięcych ani młodzieżowych.
+                        </h6>
+                        
+                        <h4 class="text-center my-3">
+                            <a class="text-danger" href="{% url 'members' %}">&gt;&gt;Poznaj nas!&lt;&lt;</a>
+                        </h4>
+
+                    </div>
+                </div>
             </div>
-            <div class="col-sm-3 text-center">
-                <h3>Zarząd Stowarzyszenia</h3>
-                <p>
-                    Prezes Zarządu
-                </p>
-                <p>
-                    Wiceprezes Zarządu
-                </p>
-                <p>
-                    Skarbnik
-                </p>
+            <div class="col-sm-3 justify-content-center">
+                <div class="d-flex h-100 flex-column">
+                    <h4 class="text-center">Władze Stowarzyszenia</h4>
+                    <div class="my-auto text-left">
+                        <h6>
+                            Piotr Przybyłowski - Prezes Zarządu
+                        <br>
+                            Aleksander Frontczak - Członek Zarządu
+                        <br>
+                            Piotr Szczygielski - Członek Zarządu
+                        </h6>
+                    </div>
+                    <div>
+                        <h4 class="text-center text-danger mb-4">
+                            <a class="text-danger" href="{% url 'documents' %}">&gt;&gt;Ważne dokumenty&lt;&lt;</a>
+                        </h4>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row justify-content-center border-top border-bottom border-dark" id="dojo">
             <div class="col text-center" style="margin-top:30px">
-                <h2>Nasze Dojo</h2>
+                <h2>Tu można nas spotkać</h2>
                 <div class="row justify-content-center" style="margin:30px">
                     <div class="col-sm-4 text-center" style="margin:20px">
                         <h4>Żoliborz </h4>
                         <p>
-                            Szkła Podstawowa 92<br>
+                            Szkoła Podstawowa 92<br>
                             ul. Przasnyska 18A<br>
                             01-756 Warszawa
                         </p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2441.826687655591!2d20.962417351733563!3d52.264692179667286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecbbe23a23857%3A0x35dfeeeb9d33ea30!2sPrimary%20School%20No.%2092%20to%20them.%20Brzechwa!5e0!3m2!1sen!2suk!4v1611134008361!5m2!1sen!2suk" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2441.826687655591!2d20.962417351733563!3d52.264692179667286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecbbe23a23857%3A0x35dfeeeb9d33ea30!2sPrimary%20School%20No.%2092%20to%20them.%20Brzechwa!5e0!3m2!1sen!2suk!4v1611134008361!5m2!1sen!2suk" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
 
                     <div class="col-sm-4 text-center" style="margin:20px">
@@ -57,13 +74,13 @@
                             ul. Józefa Poniatowskiego 10<br>
                             05-400 Otwock
                         </p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2450.8469757850426!2d21.26758205172871!3d52.10071647963747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47192a881a5823f5%3A0xf773e85852812bcf!2sPowiatowy%20M%C5%82odzie%C5%BCowy%20Dom%20Kultury%20im.%20M.%20E.%20Andriollego%20w%20Otwocku!5e0!3m2!1sen!2suk!4v1611133953306!5m2!1sen!2suk" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2450.8469757850426!2d21.26758205172871!3d52.10071647963747!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47192a881a5823f5%3A0xf773e85852812bcf!2sPowiatowy%20M%C5%82odzie%C5%BCowy%20Dom%20Kultury%20im.%20M.%20E.%20Andriollego%20w%20Otwocku!5e0!3m2!1sen!2suk!4v1611133953306!5m2!1sen!2suk" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                     </div>
                 </div>
             </div>
         </div>
 
-       <div class="row justify-content-center border-bottom border-dark" id="dojo">
+       <div class="row justify-content-center border-bottom border-dark" hidden>
             <div class="col text-center" style="margin:30px">
                 <h2>Nasi przyjaciele</h2>
                 <div class="row justify-content-center" style="margin-top:30px">
@@ -95,11 +112,11 @@
             </div>
         </div>
 
-        <div class="row justify-content-center" style="margin:30px">
+        <div class="row justify-content-center m-4">
             <div class="col-sm-4 text-center bg-danger p-3 text-white">
                 <h4>Chcesz nas wesprzeć?</h4>
-                <h4>Nasz nr konta to:</h4>
-                <h4>00-0000-0000-0000-0000-0000-0000</h4>
+                <h4>Nasz numer konta to:</h4>
+                <h4>75 2530 0008 2018 1069 6928 0001</h4>
             </div>
         </div>
     </div>

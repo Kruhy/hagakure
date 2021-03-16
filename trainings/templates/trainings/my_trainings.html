@@ -55,18 +55,18 @@
                     <div class="row justify-content-center" style="margin-top:30px">
                         <div class="col-sm-8 text-center">
                             <h2>{{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
-                            <h5 style="margin-bottom:15px">
+                            <h5 style="margin-bottom:15px" hidden>
                                 {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
                             </h5>
                             <table class="table table-bordered">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="col-sm-2">Dojo</th>
-                                        <th class="col-sm-2">Tremin</th>
-                                        <th class="col-sm-2">Dni tygodnia</th>
-                                        <th class="col-sm-2">Godzina rozpoczęcia</th>
-                                        <th class="col-sm-2">Długść</th>
-                                        <th class="col-sm-2">Trener</th>
+                                        <th class="w-2">Dojo</th>
+                                        <th class="w-2">Tremin</th>
+                                        <th class="w-2">Dni tygodnia</th>
+                                        <th class="w-2">Godzina rozpoczęcia</th>
+                                        <th class="w-2">Długść</th>
+                                        <th class="w-2">Trener</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -117,9 +117,9 @@
                                 <table class="table table-bordered">
                                     <thead class="thead-light" id="responsive">
                                         <tr>
-                                            <th class="col-sm-2">Autor</th>
-                                            <th class="col-sm-2">Dodano</th>
-                                            <th class="col-sm-8">Treść</th>
+                                            <th class="w-2">Autor</th>
+                                            <th class="w-2">Dodano</th>
+                                            <th class="w-8">Treść</th>
                                         <tr>
                                     </thead>
                                     
@@ -131,14 +131,14 @@
                                                 {% else %}
                                                 <tr class="table">
                                                 {% endif %}
-                                                    <th class="col-sm-2 align-middle">
+                                                    <th class="w-2 align-middle">
                                                         {{ message.author }}
                                                         {% if message.author == training.trainer %}
                                                         <br>(Trener)
                                                         {% endif %}
                                                     </th>
-                                                    <td class="col-sm-2 align-middle">{{ message.created_on|date:"d-m-Y H:i" }}</td>
-                                                    <td class="col-sm-8 text-left align-middle">
+                                                    <td class="w-2 align-middle">{{ message.created_on|date:"d-m-Y H:i" }}</td>
+                                                    <td class="w-8 text-left align-middle">
                                                         {{ message.body }}
                                                     </td>
                                                 </tr>
@@ -188,18 +188,18 @@
                     <div class="row justify-content-center" style="margin-top:30px">
                         <div class="col-sm-8 text-center">
                             <h2>{{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}</h2>
-                            <h5 style="margin-bottom:15px">
+                            <h5 style="margin-bottom:15px" hidden>
                                 {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
                             </h5>
                             <table class="table table-bordered">
                                 <thead class="thead-light">
                                     <tr>
-                                        <th class="col-sm-2">Dojo</th>
-                                        <th class="col-sm-2">Tremin</th>
-                                        <th class="col-sm-2">Dni tygodnia</th>
-                                        <th class="col-sm-2">Godzina rozpoczęcia</th>
-                                        <th class="col-sm-2">Długść</th>
-                                        <th class="col-sm-2">Trener</th>
+                                        <th class="w-2">Dojo</th>
+                                        <th class="w-2">Tremin</th>
+                                        <th class="w-2">Dni tygodnia</th>
+                                        <th class="w-2">Godzina rozpoczęcia</th>
+                                        <th class="w-2">Długść</th>
+                                        <th class="w-2">Trener</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -250,9 +250,9 @@
                                 <table class="table table-bordered">
                                     <thead class="thead-light" id="responsive">
                                         <tr>
-                                            <th class="col-sm-2">Autor</th>
-                                            <th class="col-sm-2">Dodano</th>
-                                            <th class="col-sm-8">Treść</th>
+                                            <th class="w-2">Autor</th>
+                                            <th class="w-2">Dodano</th>
+                                            <th class="w-8">Treść</th>
                                         <tr>
                                     </thead>
                                     <tbody>
@@ -263,14 +263,14 @@
                                                 {% else %}
                                                 <tr class="table">
                                                 {% endif %}
-                                                    <th class="col-sm-2 align-middle">
+                                                    <th class="w-2 align-middle">
                                                         {{ message.author }}
                                                         {% if message.author == training.trainer %}
                                                         <br>(Trener)
                                                         {% endif %}
                                                     </th>
-                                                    <td class="col-sm-2 align-middle">{{ message.created_on|date:"d-m-Y H:i"  }}</td>
-                                                    <td class="col-sm-8 text-left align-middle">
+                                                    <td class="w-2 align-middle">{{ message.created_on|date:"d-m-Y H:i"  }}</td>
+                                                    <td class="w-8 text-left align-middle">
                                                         {{ message.body }}
                                                     </td>
                                                 </tr>

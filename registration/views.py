@@ -2,13 +2,14 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMultiAlternatives
 from django.http import HttpResponse, Http404
 from django.shortcuts import redirect, render
 from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.html import strip_tags
 from django.views import View
 
 from utils.functions import display_name
@@ -46,16 +47,21 @@ class RegisterUser(View):
                 'token': default_token_generator.make_token(user),
             }
             mail_subject = 'Jednorazowy link do rejestracji na stronie hagakure.pl'
-            message = render_to_string('registration/confirmation_email.html', context)
+            html_message = render_to_string('registration/confirmation_email.html', context)
+            plain_message = strip_tags(html_message)
             to_email = form.cleaned_data.get('email')
-            email = EmailMessage(
-                mail_subject, message, to=[to_email]
+            email = EmailMultiAlternatives(
+                mail_subject,
+                plain_message,
+                from_email='hagakure.pl <kontakt@hagakure.pl>',
+                to=[to_email]
             )
+            email.attach_alternative(html_message, "text/html")
             email.send()
-            # messages.success(
-            #     render,
-            #     'Wiadomość email wysłana na adres {}. Użytkownik będzie mógł dokończyć rejestrację po kliknięciu w wysłany link'.format(user.email)
-            #     )
+            messages.success(
+                request,
+                'Wiadomość email wysłana na adres {}. Użytkownik będzie mógł dokończyć rejestrację po kliknięciu w wysłany link'.format(user.email)
+                )
         
         return redirect('add_user')
 
@@ -73,7 +79,9 @@ class ActivateUser(View):
         if user is not None and default_token_generator.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.success(request, 'Miło, że z nami jesteś! Uzupełnij profil, aby dokończyć rejestrację!')
+            messages.success(request,
+                'Miło, że z nami jesteś! Uzupełnij profil, aby dokończyć rejestrację!'
+                )
 
             context = {
                 'name': display_name(request.user),
@@ -93,7 +101,7 @@ class ActivateUser(View):
 
             if form.data['password'] != form.data['password2']:
                 messages.error(
-                    render,
+                    request,
                     'Podane hasła są rózne! Spróbuj jeszcze raz!'
                     )
                 context = {

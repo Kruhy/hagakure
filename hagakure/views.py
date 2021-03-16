@@ -6,6 +6,8 @@ from django.views import View
 
 from utils.functions import display_name
 
+from .models import MembersBio
+
 from trainings.models import Training, Weekday
 from articles.models import Article
 from news.models import News
@@ -90,3 +92,19 @@ class AboutView(View):
     def get(self, request, *args, **kwargs):
         context = {'name': display_name(request.user), }
         return render(request, 'hagakure/about_us.html', context)
+
+
+class DocumentsView(View):
+    def get(self, request, *args, **kwargs):
+        context = {'name': display_name(request.user), }
+        return render(request, 'hagakure/documents.html', context)
+
+
+class MembersView(View):
+    def get(self, request, *args, **kwargs):
+        members = MembersBio.objects.all().order_by('member__first_name')
+        context = {
+            'name': display_name(request.user),
+            'members': members,
+            }
+        return render(request, 'hagakure/members.html', context)

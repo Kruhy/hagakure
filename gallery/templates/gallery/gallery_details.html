@@ -20,13 +20,13 @@
                                     
                 {% if not gallery.is_published %}
                     <div class="container-fluid bg-danger text-white">
-                    <h4 class="text-center pt-3">
+                    <h4 class="text-center py-3">
                         Galeria nie widoczna na stronie
                     </h4>
                 {% elif not gallery.is_public %}
                     <div class="container-fluid bg-secondary">
-                    <h4 class="text-center pt-3">
-                        Galeria widoczna tylko dla zalogowanych urzytkowników
+                    <h4 class="text-center py-3">
+                        Galeria widoczna tylko dla zalogowanych użytkowników
                     </h4>
                 {% endif %}
             </div>
@@ -52,14 +52,14 @@
                     </ul>
 
                     <!-- The slideshow -->
-                    <div class="carousel-inner">
+                    <div class="carousel-inner text-center">
                         {% for image in images %}
                         {% if forloop.first %}
                         <div class="carousel-item active">
                         {% else %}
                         <div class="carousel-item">
                         {% endif %}
-                            <img class="rounded" src="{{ image.image.url }}">
+                            <img class="rounded d-block" src="{{ image.image.url }}">
                         </div>
                         {% endfor %}
                     </div>

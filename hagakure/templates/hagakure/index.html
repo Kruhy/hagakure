@@ -3,18 +3,22 @@
 	{% block header %}
 		<header>
 			<div class="card border-0" id="banner">
-				<div class="card-img-overlay border-bottom border-secondary">
-					<div class="container-fluid">
-						<div class="row my-4">
-							<div class="col align-self-center text-right">
-								<img class="img-fluid" src="{% static 'img/kamon.gif' %}">
-							</div>
-							<div class="col align-self-center text-left">
-								<h1 class="display-3">
-									Stowarzyszenie<br>
-									Sportowe<br>
-									Hagakure
-								</h1>
+				<div class="card-img-overlay border-bottom border-secondary d-flex h-100">
+					<div class="container-fluid d-flex justify-content-center">
+						<div class="row align-items-center">
+							<div class="col">
+								<div class="row mt-4 justify-content-center">
+									<div class="col text-center">
+										<img class="img-fluid" src="{% static 'img/kamon.gif' %}" style="height:300px;">
+									</div>
+								</div>
+								<div class="row mb-4 justify-content-center">
+									<div class="col text-center">
+										<h1 class="diplay-1">
+											Stowarzyszenie Hagakure
+										</h1>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -95,45 +99,47 @@
 	{% endblock %}
 
 	{% block body %}
-		<div class="container-fluid" style="margin-top:30px">
+		<div class="container-fluid mt-3">
 			<div class="row justify-content-center">
 				<div class="col-sm-3 order-last">
 					<a class="text-body" href="{% url 'articles' "all" %}">
-						<h5 class="text-center">Najnowsze artykuły</h5>
+						<h5 class="text-center mt-3">Najnowsze artykuły</h5>
 					</a>
 					{% for article in articles %}
-						<div class="container-fluid" style="margin-top:20px">
+						<div class="container-fluid pt-2 border-top">
 							<a href="{{ article.get_absolute_url }}" class="text-body">
-								<p class="font-weight-bold text-center">
+								<p class="font-weight-bold">
 									{{ article.title }}
 								</p>
-								{{ article.body|striptags|truncatewords:30 }}
+								<p>
+									{{ article.synopsis|safe }}
+								</p>
 							</a>
 						</div>
 					{% endfor %}		
 					{% if not articles %}
-						<div class="container-fluid" style="margin-top:20px">
+						<div class="container-fluid pt-2">
 							<p class="text-center">Brak artykułów</p>
 						</div>
 					{% endif %}
 				</div>
 				<div class="col-sm-7 border-left border-right border-dark">
 					<a class="text-body" href="{% url 'all_news' %}">
-						<h3 class="text-center">Aktualności</h3>
+						<h3 class="text-center mt-3">Aktualności</h3>
 					</a>
-					<div class="container-fluid" style="margin-top:20px">
+					<div class="container-fluid py-2">
 						{% for news in all_news %}
-						<div class="container-fluid" style="margin-top:20px">
+						<div class="container-fluid border-top py-4">
 							<a href="{% url 'all_news' %}#{{ news.pk }}" class="text-body">
 								<h4 class="text-center">
 									{{ news.title }}
 								</h4>
-								{{ news.body|safe|truncatewords:100 }}
 							</a>
+								{{ news.body|safe|truncatewords:100 }}
 						</div>
 						{% endfor %}
 						{% if not all_news %}
-							<div class="container-fluid" style="margin-top:20px">
+							<div class="container-fluid mt-2">
 							<h4 class="text-center">Brak bieżących aktualności</h4>
 							</div>
 						{% endif %}
@@ -143,7 +149,7 @@
 
 				<div class="col-sm-2 order-first">
 					<a class="text-body" href="{% url 'trainings_list' %}">
-						<h5 align="center">Treningi w tym tygodniu</h5>
+						<h5 class="text-center  mt-3">Treningi w tym tygodniu</h5>
 					</a>
 					<div class="container-fluid">
 						<table class="table table-sm">

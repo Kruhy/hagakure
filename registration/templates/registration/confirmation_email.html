@@ -1,12 +1,20 @@
-{% autoescape off %}  
-Cześć!<br>
-Dodaliśmy Cię do zarejestrowanych użytkowników stony <a href="http://hagakure.pl">hagakure.pl</a>.
-Aby dołączyć do nas kliknij w poniższy link i uzupełnij swój profil:<br>
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %} 
+{% autoescape off %}
+    
+<p>Cześć!</p>
+<p>Dodaliśmy Cię do zarejestrowanych użytkowników stony <a href="http://hagakure.pl">hagakure.pl</a>!</p>
+<p>
+    Aby dołączyć do nas kliknij w poniższy link i uzupełnij swój profil:<br>
+    &gt;&gt;<a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Uzupełnij profil</a>&lt;&lt;
+</p>
+<p>
+    Alternatywnie skopiuj poniższy adres i wklej w adres przeglądarki:
+    <br>
+    <a href="http://{{ domain }}{% url 'activate' uidb64=uid token=token %}">http://{{ domain }}{% url 'activate' uidb64=uid token=token %}</a>
+</p>
+<p>
+    Pozdrawiamy,<br>
+    Stowarzyszenie HAGAKURE
+</p>
 <br>
-<br>
-Jeżeli uważasz, że ta wiadomość trafiła do Ciebie przez pomyłkę, to bardzo przepraszamy - możesz ją śmiało zignorować.
-<br>
-Pozdrawiamy,<br>
-Stowarzyszenie HAGAKURE
+<p style="font-size:80%">Jeżeli uważasz, że ta wiadomość trafiła do Ciebie przez pomyłkę, to bardzo przepraszamy - możesz ją śmiało zignorować.</p>
 {% endautoescape %}

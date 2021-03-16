@@ -23,6 +23,7 @@ class Article(models.Model):
     is_published = models.BooleanField(default=False)
     is_public = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    synopsis = RichTextUploadingField()
 
     def __str__(self):
         return self.title

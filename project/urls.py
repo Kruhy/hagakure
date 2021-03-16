@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from hagakure.views import AboutView, LandingPageView
+from hagakure.views import AboutView, DocumentsView, LandingPageView, MembersView
 
 
 urlpatterns = [
@@ -31,5 +31,6 @@ urlpatterns = [
     path('user/', include('auth_ex.urls')),
     path('', LandingPageView.as_view(), name='landing_page'),
     path('about/', AboutView.as_view(), name='about_us'),
-    #TODO: change below in the production as per https://docs.djangoproject.com/en/3.1/howto/static-files/deployment/
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('documents/', DocumentsView.as_view(), name='documents'),
+    path('members/', MembersView.as_view(), name='members'),
+]

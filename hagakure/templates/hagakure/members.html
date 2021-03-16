@@ -1,0 +1,39 @@
+{% extends "hagakure/base.html" %}
+{% load static %}
+{% block body %}
+
+    <div class ="container-fluid p-3 text-center bg-light border-top border-bottom border-dark">
+        <h1>Trenują z nami:</h1>
+    </div>
+
+    <div class="container-fluid">
+		<div class="row justify-content-center border-bottom border-dark" style="margin-top:30px">
+            <div class="col-sm-6">
+                <table class="table table-borderless">
+                    <tbody>
+                        {% for member in members %}
+                        <tr>
+                            <td class="w-1 border text-center align-middle">
+                                <img src="{{ member.photo.url }}" alt="zdjęcie trenera" style="max-height:300px; max-width:300px;">
+                            </td>
+                            <td class="w-3 align-middle">
+                                <h4>
+                                    {{ member.member.first_name }}
+                                    {% if member.member.nick %}
+                                        &quot;{{ member.member.nick }}&quot;
+                                    {% endif %}
+                                </h4>
+                                
+                                <p>
+                                    {{ member.bio|safe }}
+                                </p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
