@@ -4,12 +4,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        
         <title>hagakure</title>
 
 	    <link rel="icon" type="image/png" href="{% static 'img/kamon_no_text_white.png'%}">
-        
-
 
         {% block style %}
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -29,13 +26,13 @@
             {% block header %}
                 <header>
                     <nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light justify-content-center border-bottom border-dark">
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
                         <a class="navbar-brand" href="{% url 'landing_page' %}">
                             <img src="{% static 'img/kamon_no_text_white.png' %}" alt="Logo" style="width:30px;">
                             Hagakure
                         </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
                         <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             <ul class="navbar-nav mx-auto">
                                 <li class="nav-item">
@@ -107,38 +104,61 @@
             <div id="content-wrap">
                 <button class="btn btn-secondary" onclick="topFunction()" id="topBtn" title="Góra strony">
                     <i class="fa fa-angle-double-up"></i>
-                </button> 
+                </button>
 
                 {% block body %}
                 
                 {% endblock %}
             
+                <div id="cookie-banner">
+                    <div class="container bg-light border justify-content-center text-center">
+                        <p class="mt-2">
+                            Ta witryna wykorzystuje ciasteczka. Korzystanie z witryny oznacza,
+                            że będą one zamieszczane w Państwa urządzeniu końcowym.<br>
+                            Więcej szczegółów można przeczytać w naszej
+                            <a href="{% static 'resources/documents/Polityka_RODO.pdf' %}" target="_blank">polityce prywatności</a>.
+                        </p>
+                        <button class="btn btn-success mb-2" id="cookie-button">Rozumiem</button>
+                    </div>
+                </div>
+
             </div>
 
             {% block footer %}
                 <footer class="footer" id="footer">
                     <div class="container-fluid align-center">
                         <div class="row bg-danger border-top border-dark" style="margin-top:10px">
-                            <div class="col-sm-3">
+                            <div class="col-sm-3 my-auto">
                                 <div class="container-fluid pt-3 align-center">
-                                    <span class="text-white">Kontakt:<br><span>
-                                    <a href="malito:kontakt@kontakt.com" class="text-white">kontakt@kontakt.com</a><br>
-                                    <a href="http://facebook.com" class="text-white">
-                                        <i class="fa fa-facebook-square"> facebook</i>
-                                    </a>
+                                    <small>
+                                        <span class="text-white">Kontakt:<br><span>
+                                        <a href="mailto:kontakt@hagakure.pl" class="text-white">kontakt@hagakure.pl</a><br>
+                                        <a href="https://www.facebook.com/stowarzyszeniehagakure" class="text-white">
+                                            <i class="fa fa-facebook-square"> facebook</i>
+                                        </a>
+                                    </small>
                                 </div>
                             </div>
-                            <div class="col-sm-6 text-center text-white">
+                            <div class="col-sm-6 text-center text-white align-middle my-auto">
                                 <span style="font-size:30px">柔道</span><br>
                                 Judo - łagodna droga
                             </div>
-                            <div class="col-sm-3 text-white text-right align-center">
-                                    <p class="py-0 my-0 font-weight-light">Stowarzyszenie Sportowe Hagakure</p>
-                                    <p class="py-0 my-0 font-weight-light">ul. Chmielna 2/31</p>
-                                    <p class="py-0 my-0 font-weight-light">00-020 Warszawa</p>
-                                    <p class="py-0 my-0 font-weight-light">NIP:00-00-000-000</p>
-                                    <p class="py-0 my-0 font-weight-light">REGON:000000000</p>
+                            <div class="col-sm-3 text-white text-right align-center my-auto">
+                                    <p class="py-0 my-0 font-weight-light">
+                                        <small>
+                                            Stowarzyszenie Hagakure<br>
+                                            al. Niepodległości 137/147/81</br>
+                                            02-570 Warszawa<br>
+                                            NIP: 5213919468<br>
+                                            REGON: 388140460
+                                        </small>
+                                    </p>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row bg-danger">
+                        <div class="container text-center">
+                            <small>&copy; Copyright {% now "Y" %}, Stowarzyszenie Hagakure</small>
                         </div>
                     </div>
                 </footer>

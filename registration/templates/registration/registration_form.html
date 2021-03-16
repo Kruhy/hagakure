@@ -22,21 +22,21 @@
                     {% csrf_token %}
                     <table class="table table-bordered">
                         <tbody>
-                            <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Email:</th>
-                                <td class="col-sm-9 align-middle">
+                            <tr hidden>
+                                <th class="w-3 align-middle table-secondary">Email:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="email" value="{{ email }}" readonly>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="align-middle">
-                                    <label for="password">Hasło:</label>
+                                <th class="w-3 align-middle table-secondary">
+                                    <label for="password">Hasło*:</label>
                                 </th>
-                                <td>
+                                <td class="w-9 align-middle">
                                     <div class="input-group">
                                         <input type="password" class="form-control pwd" placeholder="Hasło" id="password" name="password" required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default btn-outline-secondary reveal" type="button">
+                                            <button class="btn btn-default btn-outline-secondary" id="reveal" type="button">
                                                 <i class="fa fa-eye" id="eye"></i>
                                             </button>
                                         </span> 
@@ -44,14 +44,14 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="align-middle">
-                                    <label for="password2">Powtórz hasło:</label>
+                                <th class="w-3 align-middle table-secondary">
+                                    <label for="password2">Powtórz hasło*:</label>
                                 </th>
-                                <td>
+                                <td class="w-9 align-middle">
                                     <div class="input-group">
                                         <input type="password" class="form-control pwd" placeholder="Powtórz hasło" id="password2" name="password2" required>
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default btn-outline-secondary reveal" type="button">
+                                            <button class="btn btn-default btn-outline-secondary" id="reveal" type="button">
                                                 <i class="fa fa-eye" id="eye"></i>
                                             </button>
                                         </span> 
@@ -59,65 +59,73 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Imię:</th>
-                                <td class="col-sm-9 align-middle">
+                                <th class="w-3 align-middle table-secondary font-weight-bold">Imię*:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="first_name" value="{{ first_name }}" required>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Nazwisko:</th>
-                                <td class="col-sm-9 align-middle">
+                                <th class="w-3 align-middle table-secondary font-weight-bold">Nazwisko*:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="last_name" value="{{ last_name }}" required>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Nick:</th>
-                                <td class="col-sm-9 align-middle">
+                                <th class="w-3 align-middle table-secondary">Nick:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="nick" value="{{ nick }}">
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Nr telefonu:</th>
-                                <td class="col-sm-9 align-middle">
+                                <th class="w-3 align-middle table-secondary font-weight-bold">Nr telefonu*:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="phone_number" value="{{ phone_number }}" required>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Kontakt ICE:</th>
-                                <td class="col-sm-9 align-middle">
+                                <th class="w-3 align-middle table-secondary font-weight-bold">Kontakt ICE*:</th>
+                                <td class="w-9 align-middle">
                                     <input type="text" class="form-control" name="ice_contact_name" value="{{ ice_contact_name }}" required>
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Telefon ICE:</th>
-                                <td class="col-sm-9 align-middle">
-                                    <input type="text" class="form-control" name="ice_contact_number" value="{{ ice_contact_number}}" required>
+                                <th class="w-3 align-middle table-secondary font-weight-bold">Telefon ICE*:</th>
+                                <td class="w-9 align-middle">
+                                    <input type="text" class="form-control" name="ice_contact_number" value="{{ ice_contact_number }}" required>
                                 </td>
                             </tr>
-                            <tr>
-                                <th class="col-sm-3 align-middle table-secondary">Data urodzenia:</th>
-                                <td class="col-sm-9 align-middle">
+                            <tr> 
+                                <th class="w-3 align-middle table-secondary">Data urodzenia:</th>
+                                <td class="w-9 align-middle">
                                     <input type="date" class="form-control" name="birth_date" value="{{ birth_date|date:'Y-m-d' }}">
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="align-middle text-middle">
+                                <td colspan="2" class="align-middle text-center">
+                                    <input class="form-check-input" type="checkbox" required> 
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" requred> Zapoznałem/am się i zgadzam się z 
-                                        <a href = "#" target="_blank">Regulaminem</a>
+                                        Zapoznałem/am się i zgadzam się z 
+                                        <a href = "#" target="_blank">Regulaminem*</a>
                                     </label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="align-middle text-center">
+                                    
+                                    <input class="form-check-input" type="checkbox" required>
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="checkbox" required> Zapoznałem/am się i zgadzam się z 
-                                        <a href = "#" target="_blank">Polityką RODO</a>
+                                            Zapoznałem/am się i zgadzam się z 
+                                        <a href = "#" target="_blank">Polityką RODO*</a>
                                     </label>    
                                 </td> 
                             </tr>
                         </tbody>
                     </table>
+                    <p class="text-danger">*) pola wymagane</p>
                     <div class="row justify-content-center">
                         <div>
                             <input class="btn btn-secondary font-weight-bold" type="submit" value="Zapisz">
-                            <a class="btn btn-danger font-weight-bold" href=" {% url 'user_details' %}">Anuluj</a>
+                            <a class="btn btn-danger font-weight-bold" href=" {% url 'landing_page' %}">Anuluj</a>
                         </div>
                     </div>
                 </form>

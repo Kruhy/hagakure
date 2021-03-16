@@ -19,58 +19,47 @@
     <div class="container-fluid" style="margin-top:30px">
 		<div class="row justify-content-center">
             <div class="col-sm-9 text-center">
-                {% for article in page_obj %}
-                    {% if article.is_published or user.is_staff %}
-                        {% if article.is_public or user.is_authenticated %}
-                            <div class="filterDiv {% for category in article.category.all %}{{ category.name }} {% endfor %}">
-                                <a class="text-decoration-none text-dark" href="{{ article.get_absolute_url }}">
-
-                                    {% if not article.is_published %}
-                                        <div class="bg-dark text-center text-white">
-                                        <h5 class="pt-3 text-danger">Artykuł nie opublikowany na stronie</h5>
-                                        <p class="pb-3 text-danger">
-                                            <small>
-                                                Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.
-                                            </small>
+                {% if not page_obj %}
+                    <h2>Jeszcze nie ma artykułów.</h2>
+                {% endif %}
+                <div class="row">
+                    {% for article in page_obj %}
+                    <div class="col-sm-4 my-2">
+                        <div class="card bg-light mx-auto" style="width: 300px; height: 300px">
+                            {% if user.is_staff %}
+                                
+                                {% if not article.is_published %}
+                                    <div class="card-header bg-danger text-white">
+                                        <p class="text-center p-0 m-0">
+                                            <small>Artykuł nie widoczny na stronie</small>
                                         </p>
-                                    {% elif not article.is_public and user.is_staff %}
-                                        <div class="bg-secondary text-center text-white">
-                                        <h5 class="pt-3 text-dark">Artykuł widoczny tylko dla zalogowanych użytkowników</h5>
-                                        <p class="pb-3 text-dark">
-                                            <small>
-                                                Możesz zmienić widoczność artykułu wybierając "Zarządzaj artykułami" w Menu użytkownika.
-                                            </small>
-                                        </p>
-                                    {% endif %}
-
-                                    <div class="container-fluid pb-5 px-5 border">
-                                        <h2 class="my-3">{{ article.title }}.</h2>
-                                        
-                                        <div class="text-left">
-                                            
-                                            <p>
-                                                {{ article.body|striptags|truncatewords:100  }}
-                                            </p>
-                                            
-                                        </div>
-
-                                        <div class="text-right">
-                                            Autor: {{ article.author }}
-                                        </div>
-                                        
                                     </div>
+                                {% elif not article.is_public %}
+                                    <div class="card-header bg-secondary text-white">
+                                        <p class="text-center p-0 m-0">
+                                            <small>Artykuł widoczny tylko dla zalogowanych użytkowników</small>
+                                        </p>
+                                    </div>
+                                {% endif %}
+                                
+                            {% endif %}
 
-                                    {% if not article.is_published %}
-                                        </div>
-                                    {% elif not article.is_public and user.is_staff %}
-                                        </div>
-                                    {% endif %}
+                            <h3 class="card-title text-center py-3">
+                                <a href="{{ article.get_absolute_url }}" class="text-body">
+                                {{ article.title }}
                                 </a>
+                            </h3>
+                            <div class="card-body align-items-center d-flex justify-content-center">
+                                <div class="card-text text-left">                                            
+                                    <a href="{{ article.get_absolute_url }}" class="text-body">
+                                        {{ article.synopsis|safe }}
+                                    </a>
+                                </div>
                             </div>
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}
-
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

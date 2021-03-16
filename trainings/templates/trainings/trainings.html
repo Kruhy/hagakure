@@ -8,7 +8,7 @@
             <li class="nav-item">
                 <a class="btn btn-light" href="{% url 'about_us'%}#dojo">Dojo</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" hidden>
                 <a class="btn btn-light" href="{% url 'trainers' %}">Trenerzy</a>
             </li>
         </ul> 
@@ -35,7 +35,7 @@
                             {{ training.discipline }} - {{ training.age_category.name }} - {{ training.level.name }}
                         </h2>
 
-                        <h5 style="margin-bottom:15px">
+                        <h5 style="margin-bottom:15px" hidden>
                             {{ training.age_category.description }}, stopnie: {{ training.level.description }}.
                         </h5>
 
@@ -43,11 +43,11 @@
                     <table class="table table-bordered">
                         <thead class="thead-light">
                             <tr>
-                                <th class="col-sm-2">Dojo</th>
-                                <th class="col-sm-3">Tremin</th>
-                                <th class="col-sm-3">Dni tygodnia</th>
-                                <th class="col-sm-2">Godzina rozpoczęcia</th>
-                                <th class="col-sm-2">Długść</th>
+                                <th class="w-2">Dojo</th>
+                                <th class="w-3">Termin</th>
+                                <th class="w-3">Dni tygodnia</th>
+                                <th class="w-2">Godzina rozpoczęcia</th>
+                                <th class="w-2">Długść</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -84,9 +84,10 @@
                                     <span class="font-weight-bold">
                                         Trener:
                                     </span>
-                                    <a href="{% url 'trainers' %}#{{ training.trainer.pk }}">
+                                    <a href="{% url 'trainers' %}#{{ training.trainer.pk }}" hidden>
                                         {{ training.trainer }}
                                     </a>
+                                    <span>{{ training.trainer }}</span>
                                 </td>
                             </tr>
                         </tbody>

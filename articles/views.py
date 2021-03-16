@@ -27,7 +27,7 @@ class AllArticlesView(View):
             selected_category = categories.filter(name=selected_category_name).get()
             articles = articles.filter(category=selected_category)
         
-        articles_per_page = 5
+        articles_per_page = 9
         paginator = Paginator(articles, articles_per_page)
 
         page_number = request.GET.get('page')
@@ -124,6 +124,7 @@ class AddArticleView(View):
             data = form.cleaned_data
 
             article.title = data['title']
+            article.synopsis = data['synopsis']
             article.body = data['body']
             article.is_published = data['is_published']
             article.is_public = data['is_public']
@@ -144,7 +145,7 @@ class EditArticleView(View):
         categories = ArticleCategory.objects.all()
         article = Article.objects.filter(pk=article_pk).get()
 
-        form = AddArticleForm(initial={'body': article.body, })
+        form = AddArticleForm(initial={'title': article.title, 'body': article.body, 'synopsis': article.synopsis,})
 
         context = {
             'name': display_name(request.user),
@@ -164,6 +165,7 @@ class EditArticleView(View):
             data = form.cleaned_data
 
             article.title = data['title']
+            article.synopsis = data['synopsis']
             article.body = data['body']
             article.is_published = data['is_published']
             article.is_public = data['is_public']

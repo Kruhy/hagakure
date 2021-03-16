@@ -70,7 +70,7 @@ class Training(models.Model):
 class TrainerBio(models.Model):
     trainer = models.ForeignKey(User, related_name='person', on_delete=models.CASCADE)
     bio = models.TextField()
-    photo = models.ImageField(upload_to='img/trainers', default='img/no-avatar.png')
+    photo = models.ImageField(upload_to='trainers')
     disciplines = models.ManyToManyField(Discipline)
 
     def __str__(self):

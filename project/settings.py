@@ -11,7 +11,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-from .local_settings import SECRET_KEY as LOCAL_SECRET_KEY, DATABASES as LOCAL_DATABASES, EMAIL_HOST_PASSWORD as LOCAL_HOST_PASSWORD
+
+from .prod_settings import SECRET_KEY as LOCAL_KEY, DATABASES as LOCAL_DATABASES, EMAIL_HOST_PASSWORD as LOCAL_EMAIL_HOST_PASSWORD
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,13 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = LOCAL_SECRET_KEY
+SECRET_KEY = LOCAL_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['54.38.53.152', '.hagakure.pl',]
 
 # Application definition
 
@@ -132,27 +132,40 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'project/static/'),
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+FILE_UPLOAD_PERMISSIONS = 0o664
 
 # Email Server Setup
-# TODO: EMAIL_HOST, EMAIL_HOST_PASSWORD, EMSIL_HOST_USER update when available and change the backend
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = BASE_DIR
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = BASE_DIR
 
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_PASSWORD = LOCAL_HOST_PASSWORD
-EMAIL_HOST_USER = 'piotrszczygielski@gmail.com'
+EMAIL_HOST = 'SSL0.OVH.NET'
+EMAIL_HOST_PASSWORD = LOCAL_EMAIL_HOST_PASSWORD
+EMAIL_HOST_USER = 'kontakt@hagakure.pl'
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+# deployment security stuff
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+
+X_FRAME_OPTIONS = 'DENY'
+
+# to be anabled when SSL is setup
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = 3600
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 
 # ckeditor cinfiguration
 
