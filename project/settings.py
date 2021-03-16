@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 
 from .prod_settings import SECRET_KEY as LOCAL_KEY, DATABASES as LOCAL_DATABASES, EMAIL_HOST_PASSWORD as LOCAL_EMAIL_HOST_PASSWORD
+from .prod_settings import EMAIL_HOST_PASSWORD as LOCAL_HOST_PASSWORD, EMAIL_HOST as LOCAL_EMAIL_HOST, EMAIL_HOST_USER as LOCAL_EMAIL_HOST_USER
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -148,9 +150,9 @@ FILE_UPLOAD_PERMISSIONS = 0o664
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MAILER_EMAIL_BACKEND = EMAIL_BACKEND
-EMAIL_HOST = 'SSL0.OVH.NET'
+EMAIL_HOST = LOCAL_EMAIL_HOST
 EMAIL_HOST_PASSWORD = LOCAL_EMAIL_HOST_PASSWORD
-EMAIL_HOST_USER = 'kontakt@hagakure.pl'
+EMAIL_HOST_USER = LOCAL_EMAIL_HOST_USER
 EMAIL_PORT = 465
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
