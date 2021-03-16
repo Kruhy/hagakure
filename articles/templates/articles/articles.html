@@ -24,8 +24,8 @@
                 {% endif %}
                 <div class="row">
                     {% for article in page_obj %}
-                    <div class="col-sm-4 my-2">
-                        <div class="card bg-light mx-auto" style="width: 300px; height: 300px">
+                    <div class="col-lg-4 my-2">
+                        <div class="card bg-light mx-auto" style="max-width: 300px; height: 350px">
                             {% if user.is_staff %}
                                 
                                 {% if not article.is_published %}

@@ -14,54 +14,56 @@
                 {% if not galleries %}
                     <h2 class="text-center">Jeszcze nie ma nic w galerii.</h2>
                 {% endif %}
-                <div class="card-columns">
+                <div class="row justify-content-center">
                     {% for gallery in galleries %}
-                        <a href="{{ gallery.get_absolute_url }}" class="text-body">
-                            
-                            {% if user.is_staff %}
-                                {% if not gallery.is_published %}
-                                    <div class="card bg-danger" style="width:400px;height:300px">
-                                {% elif not gallery.is_public %}
-                                    <div class="card bg-secondary" style="width:400px;height:300px">
-                                {% else %}
-                                    <div class="card bg-light" style="width:400px;height:300px">
-                                {% endif %}
-                            {% else %}
-                                <div class="card bg-light" style="width:400px;height:300px">
-                            {% endif %}
-
-                                                                  
-                                    {% for key, value in images.items %}                                                
-                                        {% if key == gallery %}
-                                            <img class="card-img-top" src="{{ value.image.url }}" alt="Okładka" style="max-height:250px; max-width:400px;">
-                                        {% endif %}
-                                    {% endfor %}
-
+                        <div class="col-lg-4 d-flex justify-content-center">
+                            <a href="{{ gallery.get_absolute_url }}" class="text-body">
+                                
                                 {% if user.is_staff %}
                                     {% if not gallery.is_published %}
-                                        <div class="card-img-overlay">
-                                            <p class="text-center text-white bg-danger p-0 m-0">
-                                                <small>Galeria nie widoczna na stronie</small>
-                                            </p>
-                                        </div>
+                                        <div class="card bg-danger my-2" style="max-width:400px;height:300px">
                                     {% elif not gallery.is_public %}
-                                        <div class="card-img-overlay">
-                                            <p class="text-center text-white bg-secondary p-0 m-0">
-                                                <small>Galeria widoczna tylko dla zalogowanych użytkowników</small>
-                                            </p>
-                                        </div>
+                                        <div class="card bg-secondary my-2" style="max-width:400px;height:300px">
+                                    {% else %}
+                                        <div class="card bg-light my-2" style="max-width:400px;height:300px">
                                     {% endif %}
+                                {% else %}
+                                    <div class="card bg-light my-2" style="max-width:400px;height:300px">
                                 {% endif %}
-                                    <div class="card-body text-center">
-                                    <div class="card-title">
-                                        <h4 class="card-title text-center pt-3 mt-auto">
-                                            {{ gallery.title }}
-                                        </h4>                                        
+
+                                                                    
+                                        {% for key, value in images.items %}                                                
+                                            {% if key == gallery %}
+                                                <img class="card-img-top" src="{{ value.image.url }}" alt="Okładka">
+                                            {% endif %}
+                                        {% endfor %}
+
+                                    {% if user.is_staff %}
+                                        {% if not gallery.is_published %}
+                                            <div class="card-img-overlay">
+                                                <p class="text-center text-white bg-danger p-0 m-0">
+                                                    <small>Galeria nie widoczna na stronie</small>
+                                                </p>
+                                            </div>
+                                        {% elif not gallery.is_public %}
+                                            <div class="card-img-overlay">
+                                                <p class="text-center text-white bg-secondary p-0 m-0">
+                                                    <small>Galeria widoczna tylko dla zalogowanych użytkowników</small>
+                                                </p>
+                                            </div>
+                                        {% endif %}
+                                    {% endif %}
+                                        <div class="card-body text-center">
+                                        <div class="card-title">
+                                            <h4 class="card-title text-center pt-3 mt-auto">
+                                                {{ gallery.title }}
+                                            </h4>                                        
+                                        </div>
                                     </div>
+                                
                                 </div>
-                            
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     {% endfor %}
                 </div>
             </div>

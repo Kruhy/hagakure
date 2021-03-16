@@ -169,7 +169,6 @@ class EditArticleView(View):
             article.body = data['body']
             article.is_published = data['is_published']
             article.is_public = data['is_public']
-            article.author = request.user
             article.save()
             article.category.set(data['category'])
         
