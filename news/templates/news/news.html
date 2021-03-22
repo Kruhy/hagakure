@@ -39,40 +39,39 @@
 
                 {% for news in all_news %}
                     <div class="filterDiv {{ news.created_on|date:"Y"}} {{ news.created_on|date:"Y-M"|localize}}">
-                        {% if news.is_published and news.expiration_date|date:"d-m-Y" > today or news.is_published and not news.expiration_date or user.is_staff %}
-
-                            {% if news.is_public or user.is_authenticated %}
-                                
-                                {% if not news.is_published %}
-                                <div class="bg-dark text-left text-white">
-                                    <div class="pt-3 text-danger text-center border-bottom border-light">
-                                        <h5>Aktualność nie została jeszcze opublikowana na stronie.</h5>
-                                        <p class="pb-3">
-                                        </p>
-                                    </div>
-                                {% elif user.is_staff and not news.is_public %}
-                                
-                                <div class="bg-secondary text-left text-dark">
-                                    <div class="pt-3 text-dark text-center border-bottom border-light">
-                                        <h5>Aktualność widoczna tylko dla zalogowanych użytkowników.</h5>
-                                    </div>
-                                
-                                {% else %}
-                                <div class="text-left p-3 border-bottom border-dark">
-                                {% endif %}
-                                    <div class="text-center pt-3" id="{{ news.pk }}">
-                                        <h2 class="mb-0 pb-0">{{ news.title }}</h2>
-                                        <small class="pb-3">({{ news.created_on|date:"d-m-Y H:i" }})</small>
-                                    </div>
-                                        <p>
-                                            {{ news.body|safe }}
-                                        </p>
-                                        <p class="text-right" hidden>
-                                            {{ news.author }}
-                                        </p>
+                        
+                        {% if news.is_public or user.is_authenticated %}
+                            
+                            {% if not news.is_published %}
+                            <div class="bg-dark text-left text-white">
+                                <div class="pt-3 text-danger text-center border-bottom border-light">
+                                    <h5>Aktualność nie została jeszcze opublikowana na stronie.</h5>
+                                    <p class="pb-3">
+                                    </p>
                                 </div>
+                            {% elif user.is_staff and not news.is_public %}
+                            
+                            <div class="bg-secondary text-left text-dark">
+                                <div class="pt-3 text-dark text-center border-bottom border-light">
+                                    <h5>Aktualność widoczna tylko dla zalogowanych użytkowników.</h5>
+                                </div>
+                            
+                            {% else %}
+                            <div class="text-left p-3 border-bottom border-dark">
                             {% endif %}
+                                <div class="text-center pt-3" id="{{ news.pk }}">
+                                    <h2 class="mb-0 pb-0">{{ news.title }}</h2>
+                                    <small class="pb-3">({{ news.created_on|date:"d-m-Y H:i" }})</small>
+                                </div>
+                                    <p>
+                                        {{ news.body|safe }}
+                                    </p>
+                                    <p class="text-right" hidden>
+                                        {{ news.author }}
+                                    </p>
+                            </div>
                         {% endif %}
+                        
                     </div>
                 {% endfor %}
             </div>
