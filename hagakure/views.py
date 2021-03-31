@@ -58,9 +58,9 @@ class LandingPageView(View):
             ).order_by('start_hour')
 
         if request.user.is_authenticated:
-            articles = Article.objects.filter(is_published=True).order_by('-created_on')[:5]
+            articles = Article.objects.filter(is_published=True).order_by('-publication_date')[:5]
         else:
-            articles = Article.objects.filter(is_published=True, is_public=True).order_by('-created_on')[:5]
+            articles = Article.objects.filter(is_published=True, is_public=True).order_by('-publication_date')[:5]
 
         if request.user.is_authenticated:
             news = News.objects.filter(is_published=True).filter(
