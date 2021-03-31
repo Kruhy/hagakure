@@ -1,3 +1,4 @@
+from datetime import date
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.shortcuts import redirect, render
@@ -17,11 +18,11 @@ class AllArticlesView(View):
         categories = ArticleCategory.objects.all().order_by('name')
 
         if request.user.is_staff:
-            articles = Article.objects.all().order_by('-created_on')
+            articles = Article.objects.all().order_by('-publication_date')
         elif request.user.is_authenticated:
-            articles = Article.objects.filter(is_published=True).all().order_by('-created_on')
+            articles = Article.objects.filter(is_published=True).all().order_by('-publication_date')
         else:
-            articles = Article.objects.filter(is_published=True, is_public=True).all().order_by('-created_on')
+            articles = Article.objects.filter(is_published=True, is_public=True).all().order_by('-publication_date')
 
         if selected_category_name != 'all':
             selected_category = categories.filter(name=selected_category_name).get()
@@ -129,6 +130,8 @@ class AddArticleView(View):
             article.is_published = data['is_published']
             article.is_public = data['is_public']
             article.author = request.user
+            if data['is_published']:
+                article.publication_date = date.today()
             article.save()
             article.category.set(data['category'])
         
@@ -163,7 +166,8 @@ class EditArticleView(View):
 
         if form.is_valid():
             data = form.cleaned_data
-
+            if data['is_published'] and not(article.is_published):
+                article.publication_date = date.today()
             article.title = data['title']
             article.synopsis = data['synopsis']
             article.body = data['body']

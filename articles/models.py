@@ -24,6 +24,7 @@ class Article(models.Model):
     is_public = models.BooleanField(default=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     synopsis = RichTextUploadingField()
+    publication_date = models.DateField(null=True)
 
     def __str__(self):
         return self.title
